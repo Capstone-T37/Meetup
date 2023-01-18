@@ -26,9 +26,9 @@ $ rvm install 2.7.5
 ```
 
 ```java
-cd ios
-bundle install
-bundle exec pod install
+$ cd ios
+$ bundle install
+$ bundle exec pod install
 ```
 
 ```java
