@@ -2,19 +2,19 @@
 
 
 ```java
-npm install 
+$ npm install 
 ```
 
 ```java
-brew install node
+$ brew install node
 ```
 
 ```java
-brew install watchman
+$ brew install watchman
 ```
 
 ```java
-\curl -sSL https://get.rvm.io | bash
+$ \curl -sSL https://get.rvm.io | bash
 ```
 
 ```
@@ -22,7 +22,7 @@ Quit all Terminal
 ```
 
 ```java
-rvm install 2.7.5
+$ rvm install 2.7.5
 ```
 
 ```java
@@ -32,10 +32,10 @@ bundle exec pod install
 ```
 
 ```java
-npx react-native start
+$ npx react-native start
 ```
 
 ```java
-npx react-native run-ios
+$ npx react-native run-ios
 ```
  
