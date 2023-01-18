@@ -1,4 +1,8 @@
 ```java
+npm install 
+```
+
+```java
 brew install node
 ```
 
