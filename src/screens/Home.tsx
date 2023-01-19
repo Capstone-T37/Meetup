@@ -1,14 +1,15 @@
 import { View, Text } from 'react-native'
 import React from 'react'
+import MapComponent from '../components/MapComponent'
 
 type Props = {}
 
 const Home = (props: Props) => {
-  return (
-    <View>
-      <Text>Home</Text>
-    </View>
-  )
+    return (
+        <View>
+            <MapComponent />
+        </View>
+    )
 }
 
 export default Home
