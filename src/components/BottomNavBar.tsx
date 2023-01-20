@@ -4,7 +4,7 @@ import { View, Text } from 'react-native'
 import React from 'react'
 import Home from '../screens/Home';
 import CounterScreen from '../screens/CounterScreen';
-
+import AntDesign from 'react-native-vector-icons/AntDesign'
 type Props = {}
 
 const BottomNavBar = (props: Props) => {
@@ -12,9 +12,9 @@ const BottomNavBar = (props: Props) => {
 
     return (
         <NavigationContainer >
-            <Tab.Navigator screenOptions={{ tabBarIconStyle: { display: "none" } }}>
-                <Tab.Screen name="Home" component={Home} />
-                <Tab.Screen name="Counter" component={CounterScreen} />
+            <Tab.Navigator >
+                <Tab.Screen name="Home" component={Home} options={{tabBarIcon:()=>(<AntDesign name='home'/>)}}/>
+                <Tab.Screen name="Counter" component={CounterScreen} options={{tabBarIcon:()=>(<AntDesign name='clockcircleo'/>)}}/>
             </Tab.Navigator>
         </NavigationContainer>
     )
