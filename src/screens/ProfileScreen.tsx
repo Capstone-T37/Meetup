@@ -1,6 +1,7 @@
 import { StyleSheet, Text, View, SafeAreaView, Image, ScrollView } from "react-native";
 import React from 'react'
 import Ionicons from 'react-native-vector-icons/Ionicons';
+import Feather from 'react-native-vector-icons/Feather';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 
 
@@ -12,12 +13,12 @@ const ProfileScreen = (props: Props) => {
             <ScrollView showsVerticalScrollIndicator={false}>
                 <View style={styles.titleBar}>
                     <Ionicons name="ios-arrow-back" size={24} color="#52575D"></Ionicons>
-                    <Ionicons name="md-more" size={24} color="#52575D"></Ionicons>
+                    <Feather name="more-vertical" size={24} color="#52575D"></Feather>
                 </View>
 
                 <View style={{ alignSelf: "center" }}>
                     <View style={styles.profileImage}>
-
+                        <Image source={require("../assets/test.png")} style={styles.image} resizeMode='center'></Image>
                     </View>
                     <View style={styles.dm}>
                         <MaterialIcons name="chat" size={18} color="#DFD8C8"></MaterialIcons>
@@ -36,28 +37,28 @@ const ProfileScreen = (props: Props) => {
                 <View style={styles.statsContainer}>
                     <View style={styles.statsBox}>
                         <Text style={[styles.text, { fontSize: 24 }]}>483</Text>
-                        <Text style={[styles.text, styles.subText]}>Posts</Text>
+                        <Text style={[styles.text, styles.subText]}>Score</Text>
                     </View>
                     <View style={[styles.statsBox, { borderColor: "#DFD8C8", borderLeftWidth: 1, borderRightWidth: 1 }]}>
-                        <Text style={[styles.text, { fontSize: 24 }]}>45,844</Text>
-                        <Text style={[styles.text, styles.subText]}>Followers</Text>
+                        <Text style={[styles.text, { fontSize: 24 }]}>20</Text>
+                        <Text style={[styles.text, styles.subText]}>Meets</Text>
                     </View>
                     <View style={styles.statsBox}>
-                        <Text style={[styles.text, { fontSize: 24 }]}>302</Text>
-                        <Text style={[styles.text, styles.subText]}>Following</Text>
+                        <Text style={[styles.text, { fontSize: 24 }]}>5</Text>
+                        <Text style={[styles.text, styles.subText]}>Friends</Text>
                     </View>
                 </View>
 
                 <View style={{ marginTop: 32 }}>
                     <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
                         <View style={styles.mediaImageContainer}>
-
+                            <Image source={require('../assets/test.png')} style={styles.image} resizeMode='cover'></Image>
                         </View>
                         <View style={styles.mediaImageContainer}>
-
+                        <Image source={require('../assets/test.png')} style={styles.image} resizeMode='cover'></Image>
                         </View>
                         <View style={styles.mediaImageContainer}>
-
+                        <Image source={require('../assets/test.png')} style={styles.image} resizeMode='cover'></Image>
                         </View>
                     </ScrollView>
                     <View style={styles.mediaCount}>
@@ -71,7 +72,7 @@ const ProfileScreen = (props: Props) => {
                         <View style={styles.activityIndicator}></View>
                         <View style={{ width: 250 }}>
                             <Text style={[styles.text, { color: "#41444B", fontWeight: "300" }]}>
-                                Started following <Text style={{ fontWeight: "400" }}>Jake Challeahe</Text> and <Text style={{ fontWeight: "400" }}>Luis Poteer</Text>
+                                Meetup with <Text style={{ fontWeight: "400" }}>Jake Challeahe</Text> 
                             </Text>
                         </View>
                     </View>
@@ -80,7 +81,7 @@ const ProfileScreen = (props: Props) => {
                         <View style={styles.activityIndicator}></View>
                         <View style={{ width: 250 }}>
                             <Text style={[styles.text, { color: "#41444B", fontWeight: "300" }]}>
-                                Started following <Text style={{ fontWeight: "400" }}>Luke Harper</Text>
+                                Became friends with <Text style={{ fontWeight: "400" }}>Luke Harper</Text>
                             </Text>
                         </View>
                     </View>
@@ -103,8 +104,8 @@ const styles = StyleSheet.create({
     },
     image: {
         flex: 1,
-        height: undefined,
-        width: undefined
+        height: '100%',
+        width: '100%'
     },
     titleBar: {
         flexDirection: "row",
@@ -122,7 +123,10 @@ const styles = StyleSheet.create({
         width: 200,
         height: 200,
         borderRadius: 100,
-        overflow: "hidden"
+        overflow: "hidden",
+        backgroundColor:'grey',
+        borderColor:'grey',
+        borderWidth:10
     },
     dm: {
         backgroundColor: "#41444B",
@@ -179,11 +183,11 @@ const styles = StyleSheet.create({
     mediaCount: {
         backgroundColor: "#41444B",
         position: "absolute",
-        top: "50%",
+        bottom: 0,
         marginTop: -50,
-        marginLeft: 30,
-        width: 100,
-        height: 100,
+        marginLeft: 10,
+        width: 70,
+        height: 70,
         alignItems: "center",
         justifyContent: "center",
         borderRadius: 12,
