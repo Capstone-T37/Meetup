@@ -5,6 +5,8 @@ import React from 'react'
 import Home from '../screens/Home';
 import CounterScreen from '../screens/CounterScreen';
 import AntDesign from 'react-native-vector-icons/AntDesign'
+import ProfileScreen from '../screens/ProfileScreen';
+
 type Props = {}
 
 const BottomNavBar = (props: Props) => {
@@ -13,7 +15,7 @@ const BottomNavBar = (props: Props) => {
     return (
         <NavigationContainer >
             <Tab.Navigator >
-                <Tab.Screen name="Home" component={Home} options={{tabBarIcon:()=>(<AntDesign name='home'/>)}}/>
+                <Tab.Screen name="Home" component={ProfileScreen} options={{tabBarIcon:()=>(<AntDesign name='home'/>)}}/>
                 <Tab.Screen name="Counter" component={CounterScreen} options={{tabBarIcon:()=>(<AntDesign name='clockcircleo'/>)}}/>
             </Tab.Navigator>
         </NavigationContainer>
