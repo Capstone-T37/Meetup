@@ -3,7 +3,7 @@ import React from 'react'
 import type { RootState } from '../redux/store'
 import { useSelector, useDispatch } from 'react-redux'
 import { decrement, increment } from '../redux/slices/counterSlice'
-
+import Icon from 'react-native-vector-icons/Ionicons';
 type Props = {}
 
 const Counter = (props: Props) => {
@@ -15,6 +15,7 @@ const Counter = (props: Props) => {
             <Button title='Increment' onPress={()=>dispatch(increment())}/>
             <Button title='Decrement' onPress={()=>dispatch(decrement())}/>
             <Text>{count}</Text>
+            <Icon name="ios-person" size={30} color="#4F8EF7" />
         </View>
     )
 }
