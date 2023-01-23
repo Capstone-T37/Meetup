@@ -5,6 +5,7 @@ import { Provider as StoreProvider } from 'react-redux';
 import BottomNavBar from './src/components/BottomNavBar';
 import MainPage from './src/screens/MainPage';
 import { MD3LightTheme as DefaultTheme, Provider as PaperProvider } from 'react-native-paper';
+import SignUp from './src/screens/SignUp';
 
 const theme = {
   ...DefaultTheme,
@@ -19,7 +20,7 @@ const App = () => {
   return (
     <StoreProvider store={store}>
       <PaperProvider theme={theme}>
-      <MainPage />
+        <SignUp />
       </PaperProvider>
     </StoreProvider>
     
