@@ -3,7 +3,7 @@ import { SafeAreaView, StyleSheet, Button, Text } from 'react-native';
 import { store } from './src/redux/store'
 import { Provider as StoreProvider } from 'react-redux';
 import BottomNavBar from './src/components/BottomNavBar';
-import MainPage from './src/screens/MainPage';
+import Login from './src/screens/Login';
 import { MD3LightTheme as DefaultTheme, Provider as PaperProvider } from 'react-native-paper';
 import SignUp from './src/screens/SignUp';
 

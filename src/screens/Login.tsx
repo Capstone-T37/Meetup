@@ -10,14 +10,14 @@ const navigateToSignUp = async () => {
     
 }
 
-const MainPage = (props: Props) => {
+const Login = (props: Props) => {
     return (
         <KeyboardAvoidingView behavior="padding" >
             <View style = {styles.body}>
                 <View style = {styles.container}>
                     <Image
                         style = {styles.stretch}
-                        source={require('../icons/meetup.png')}
+                        source={require('../assets/meetup.png')}
                     />
                     <Text style={styles.txt}> Meetup </Text>
                 </View>
@@ -94,4 +94,4 @@ const styles = StyleSheet.create({
         marginLeft: 20
     }
 })
-export default MainPage
+export default Login

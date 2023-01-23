@@ -3,7 +3,8 @@ import { View, Text , StyleSheet, Image, KeyboardAvoidingView} from 'react-nativ
 import React from 'react'
 import { Checkbox, TextInput } from 'react-native-paper';
 import { Button } from 'react-native-paper';
-
+import AntDesign from 'react-native-vector-icons/AntDesign'
+import Ionicons from 'react-native-vector-icons/Ionicons'
 
 type Props = {}
 
@@ -15,14 +16,11 @@ const SignUp = (props: Props) => {
             <View style = {styles.body}>
                 <View style = {styles.container}>
                     <Button  mode="text" style ={{height: 50, width: 50}} >
-                        <Image
-                            style ={{height: 35, width: 35}}
-                            source={require('../icons/back.png')}
-                        />
+                    <Ionicons name='chevron-back' size={30} />
                     </Button>
                         <Image
                             style = {styles.stretch}
-                            source={require('../icons/meetup.png')}
+                            source={require('../assets/meetup.png')}
                         />
                         <Text style={styles.txt}> Meetup </Text>
                 </View>
@@ -56,10 +54,7 @@ const SignUp = (props: Props) => {
                         placeholder="Enter promo code"
                     />
                     <Button  style={{borderRadius: 70, marginBottom: 32, width: 80, height: 60, marginLeft: '75%' }} mode="contained" >
-                        <Image
-                            style = {styles.stretch}
-                            source={require('../icons/next.png')}
-                        />
+                    <AntDesign name='arrowright'/>
                     </Button>
                     <View style={styles.bottomView}>
                         <Text style={styles.txt3}> Already have an account? </Text>
