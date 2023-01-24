@@ -3,9 +3,11 @@ import { SafeAreaView, StyleSheet, Button, Text } from 'react-native';
 import { store } from './src/redux/store'
 import { Provider as StoreProvider } from 'react-redux';
 import BottomNavBar from './src/components/BottomNavBar';
+import { createNativeStackNavigator } from '@react-navigation/native-stack'
 import Login from './src/screens/Login';
 import { MD3LightTheme as DefaultTheme, Provider as PaperProvider } from 'react-native-paper';
 import SignUp from './src/screens/SignUp';
+import { NavigationContainer } from '@react-navigation/native';
 
 const theme = {
   ...DefaultTheme,
@@ -16,11 +18,26 @@ const theme = {
   },
 };
 
+const Stack = createNativeStackNavigator()
+
 const App = () => {
   return (
     <StoreProvider store={store}>
       <PaperProvider theme={theme}>
-        <SignUp />
+        <NavigationContainer>
+                    <Stack.Navigator>
+                        <Stack.Screen
+                            name="Login"
+                            options={{ headerShown: false }}
+                            component={Login}
+                        />
+                        <Stack.Screen
+                            name="SignUp"
+                            component={SignUp}
+                            options={{ headerShown: false }}
+                        />
+                    </Stack.Navigator>
+                </NavigationContainer>
       </PaperProvider>
     </StoreProvider>
     

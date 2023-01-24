@@ -54,7 +54,7 @@ const SignUp = (props: Props) => {
                         placeholder="Enter promo code"
                     />
                     <Button  style={{borderRadius: 70, marginBottom: 32, width: 80, height: 60, marginLeft: '75%' }} mode="contained" >
-                    <AntDesign name='arrowright'/>
+                    <AntDesign name='arrowright' size={30}/>
                     </Button>
                     <View style={styles.bottomView}>
                         <Text style={styles.txt3}> Already have an account? </Text>

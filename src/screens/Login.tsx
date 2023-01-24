@@ -1,48 +1,77 @@
-import { View, Text , StyleSheet, Image, KeyboardAvoidingView} from 'react-native'
+import {  Image, KeyboardAvoidingView} from 'react-native'
 import React from 'react'
-import { TextInput } from 'react-native-paper';
 import { Button } from 'react-native-paper';
 
+import { Navigation } from 'react-native-navigation';
+import SignUp from './SignUp';
+import { useForm, Controller } from "react-hook-form";
+import Constants from 'expo-constants';
+import { Text, View, StyleSheet } from 'react-native';
+import CInput from '../components/CInput';
 
-type Props = {}
 
-const navigateToSignUp = async () => {
+
+
+const Login = (props: any) => {
+
+    const { register, setValue, handleSubmit, control, reset, formState: { errors } } = useForm({
+        defaultValues: {
+          email: '',
+          password: ''
+        }
+      });
+      const onSubmit = (data: any) => {
+        console.log(data);
+      };
     
-}
+      const onChange = (arg: any) => {
+        return {
+          value: arg.nativeEvent.text,
+        };
+      };
+    
+      console.log('errors', errors);
 
-const Login = (props: Props) => {
     return (
         <KeyboardAvoidingView behavior="padding" >
             <View style = {styles.body}>
                 <View style = {styles.container}>
-                    <Image
-                        style = {styles.stretch}
-                        source={require('../assets/meetup.png')}
-                    />
-                    <Text style={styles.txt}> Meetup </Text>
+                        <Image
+                            style = {styles.stretch}
+                            source={require('../assets/meetup.png')}
+                        />
+                        <Text style={styles.txt}> Meetup </Text>
+                    </View>
+                    <View style={{marginBottom: 60}}>
+                        <Text style={styles.txt1}> Welcome back, </Text>
+                        <Text style={styles.txt2}> Sign in to continue </Text>
                 </View>
-                <View style={{marginBottom: 60}}>
-                    <Text style={styles.txt1}> Welcome back, </Text>
-                    <Text style={styles.txt2}> Sign in to continue </Text>
-                </View>
-                <TextInput style={{marginBottom: 30}}
-                    
-                    label="email"
-                    placeholder="Please enter your email..."
+                <CInput
+                    control = {control}
+                    placeholder= "Please enter your email..."
+                    label = "email"
+                    name = "email"
+                    secureTextEntry = {false}
                 />
-                <TextInput style={{marginBottom: 45}}
-                    
-                    label="password"
-                    placeholder="Please enter your password..."
-                    secureTextEntry
-                    
+                {errors.email && <Text>This is required.</Text>}
+
+                <CInput
+                    control = {control}
+                    placeholder= "Please enter your password..."
+                    label = "password"
+                    name = "password"
+                    secureTextEntry = {true}
                 />
+                {errors.password && <Text>This is required.</Text>}
+                <Button   mode="contained" onPress={ () => handleSubmit(onSubmit) } >
+                    SUBMIIIIIT
+                </Button>
                 <Button  style={{borderRadius: 8, marginBottom: 210}} mode="contained" onPress={() => console.log('Pressed')}>
                     Sign in
                 </Button>
                 <View style={styles.bottomView}>
                     <Text style={styles.txt3}> Don't have an account? </Text>
-                    <Button  onPress={navigateToSignUp} style={{borderRadius: 8, width: 110, padding: 0}}  labelStyle={{fontSize: 12}} mode="outlined">
+                    <Button  style={{borderRadius: 8, width: 110, padding: 0}}  labelStyle={{fontSize: 12}} mode="outlined">
                         Sign Up
                     </Button>
                 </View>
@@ -61,7 +90,7 @@ const styles = StyleSheet.create({
     stretch: {
         width: 50,
         height: 50,
-        
+
       },
     txt: {
         fontSize: 30,
@@ -94,4 +123,5 @@ const styles = StyleSheet.create({
         marginLeft: 20
     }
 })
+
 export default Login
