@@ -9,9 +9,11 @@ import { Constants } from 'react-native-navigation';
 import { useNavigation } from '@react-navigation/native';
 
 
+export interface Props {
+    navigation: any;
+}
 
-
-const Login = (props: any) => {
+const Login : React.FC<Props> = (props: Props) => {
 
     const { handleSubmit, control, formState: { errors } } = useForm({
         defaultValues: {
@@ -21,6 +23,7 @@ const Login = (props: any) => {
       });
     const onSubmit = (data: any) => {
         console.log(data);
+        props.navigation.push("Session")
       }
       console.log('errors', errors);
 
@@ -64,13 +67,15 @@ const Login = (props: any) => {
                     control={control}
                     style= {{borderRadius: 8, marginBottom: 210}}
                     name="button"
-                    mode="contained" onPress={handleSubmit(onSubmit)}/>
+                    mode="contained" 
+                    onPress={handleSubmit(onSubmit)}/>
                 <View style={styles.bottomView}>
                     <Text style={styles.txt3}> Don't have an account? </Text>
                     <Button 
                         style={{borderRadius: 8, width: 110, padding: 0}}  
                         labelStyle={{fontSize: 12}} 
                         mode="outlined"
+                        onPress={() => props.navigation.push("SignUp")}
                         >
                         Sign Up
                     </Button>

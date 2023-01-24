@@ -8,7 +8,11 @@ import Ionicons from 'react-native-vector-icons/Ionicons'
 import { Controller, useForm } from 'react-hook-form';
 import CInput from '../components/CInput';
 
-const SignUp = (props: any) => {
+export interface Props {
+    navigation: any;
+}
+
+const SignUp: React.FC<Props> = (props: Props) => {
     const { handleSubmit, control, formState: { errors } } = useForm({
         defaultValues: {
           email: '',
@@ -17,6 +21,7 @@ const SignUp = (props: any) => {
       });
     const onSubmit = (data: any) => {
         console.log(data);
+        props.navigation.push("Session")
       }
       console.log('errors', errors);
     return (
@@ -110,7 +115,11 @@ const SignUp = (props: any) => {
                     />
                     <View style={styles.bottomView}>
                         <Text style={styles.txt3}> Already have an account? </Text>
-                        <Button  style={{borderRadius: 8, width: 110, padding: 0}}  labelStyle={{fontSize: 12}} mode="outlined">
+                        <Button  
+                            style={{borderRadius: 8, width: 110, padding: 0}}  
+                            labelStyle={{fontSize: 12}} 
+                            onPress = {()=> props.navigation.push("Login")}
+                            mode="outlined">
                             Sign In
                         </Button>
                     </View>
