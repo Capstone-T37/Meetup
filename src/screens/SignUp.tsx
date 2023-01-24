@@ -23,8 +23,8 @@ const SignUp = (props: any) => {
         <KeyboardAvoidingView behavior="padding" >
             <View style = {styles.body}>
                 <View style = {styles.container}>
-                    <Button  mode="text" style ={{height: 50, width: 50}} >
-                    <Ionicons name='chevron-back' size={30} />
+                    <Button  mode="text" style ={{height: 40, width: 40}} >
+                    <Ionicons name='chevron-back' size={25} />
                     </Button>
                         <Image
                             style = {styles.stretch}
@@ -101,10 +101,10 @@ const SignUp = (props: any) => {
                         name = ""
                         render = {() => {
                             return <Button 
-                                        style={{borderRadius: 70, marginBottom: 32, width: 80, height: 60, marginLeft: '75%' }}
+                                        style={{borderRadius: 70, marginBottom: 32, width: 70, height: 40, marginLeft: '75%' }}
                                         mode= "contained"
                                         onPress={handleSubmit(onSubmit)}>  
-                                        <AntDesign name='arrowright' size={30}/>
+                                        <AntDesign name='arrowright' size={25}/>
                                     </Button>
                         }}
                     />
