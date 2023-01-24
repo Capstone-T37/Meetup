@@ -1,11 +1,6 @@
-import {  Image, KeyboardAvoidingView} from 'react-native'
+import {  Button, Image, KeyboardAvoidingView} from 'react-native'
 import React from 'react'
-import { Button } from 'react-native-paper';
-
-import { Navigation } from 'react-native-navigation';
-import SignUp from './SignUp';
-import { useForm, Controller } from "react-hook-form";
-import Constants from 'expo-constants';
+import { useForm } from "react-hook-form";
 import { Text, View, StyleSheet } from 'react-native';
 import CInput from '../components/CInput';
 
@@ -63,18 +58,8 @@ const Login = (props: any) => {
                     secureTextEntry = {true}
                 />
                 {errors.password && <Text>This is required.</Text>}
-                <Button   mode="contained" onPress={ () => handleSubmit(onSubmit) } >
-                    SUBMIIIIIT
-                </Button>
-                <Button  style={{borderRadius: 8, marginBottom: 210}} mode="contained" onPress={() => console.log('Pressed')}>
-                    Sign in
-                </Button>
-                <View style={styles.bottomView}>
-                    <Text style={styles.txt3}> Don't have an account? </Text>
-                    <Button  style={{borderRadius: 8, width: 110, padding: 0}}  labelStyle={{fontSize: 12}} mode="outlined">
-                        Sign Up
-                    </Button>
-                </View>
+                <Button title="Submit" onPress={handleSubmit(onSubmit)} />
+                
             </View>
         </KeyboardAvoidingView>
     )

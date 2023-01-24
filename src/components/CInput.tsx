@@ -19,8 +19,11 @@ const CInput: React.FC<Props> = ({control, name, label, placeholder, secureTextE
                 control = {control}
                 name = {name}
                 render = {({field: {value, onBlur, onChange}}) => {
-                    return <TextInput style={{marginBottom: 30}}
+                    return <TextInput 
+                        style={{marginBottom: 30}}
                         label={label}
+                        onBlur = {onBlur}
+                        onChangeText= {onChange}
                         placeholder={placeholder}
                         secureTextEntry = {secureTextEntry}
                         value={value}
