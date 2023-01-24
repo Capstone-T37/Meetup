@@ -21,6 +21,18 @@ const Login : React.FC<Props> = (props: Props) => {
           password: ''
         }
       });
+
+    const emailRules = {
+        required: 'Your email is required',
+        pattern: {value: /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/g , message: 'invalid email'}
+    }
+
+    const passwordRules = {
+        required: 'Your password is required',
+        minLength: {value: 8, message: 'password should contain at least 8 characters'},
+        maxLength: {value: 20, message: 'password should contain at most 20 characters'}
+    }
+
     const onSubmit = (data: any) => {
         console.log(data);
         props.navigation.push("Session")
@@ -30,6 +42,7 @@ const Login : React.FC<Props> = (props: Props) => {
     return (
         <KeyboardAvoidingView behavior="padding" >
             <View style = {styles.body}>
+                
                 <View style = {styles.container}>
                         <Image
                             style = {styles.stretch}
@@ -41,34 +54,35 @@ const Login : React.FC<Props> = (props: Props) => {
                         <Text style={styles.txt1}> Welcome back, </Text>
                         <Text style={styles.txt2}> Sign in to continue </Text>
                 </View>
+
                 <CInput
                     control = {control}
                     style={{marginBottom: 30}}
-                    rules = {{required: true}}
+                    rules = {emailRules}
                     placeholder= "Please enter your email..."
                     label = "email"
                     name = "email"
                     secureTextEntry = {false}
                 />
-                {errors.email && <Text>This is required.</Text>}
 
                 <CInput
                     control = {control}
                     style={{marginBottom: 30}}
-                    rules = {{required: true}}
+                    rules = {passwordRules}
                     placeholder= "Please enter your password..."
                     label = "password"
                     name = "password"
                     secureTextEntry = {true}
                 />
-                {errors.password && <Text>This is required.</Text>}
+
                 <CButton 
                     content="Sign In"
                     control={control}
-                    style= {{borderRadius: 8, marginBottom: 210}}
+                    style= {{borderRadius: 8, marginBottom: 180}}
                     name="button"
                     mode="contained" 
                     onPress={handleSubmit(onSubmit)}/>
+                    
                 <View style={styles.bottomView}>
                     <Text style={styles.txt3}> Don't have an account? </Text>
                     <Button 

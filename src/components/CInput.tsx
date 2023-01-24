@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { View } from 'react-native';
-import { TextInput } from 'react-native-paper';
+import { Text, TextInput } from 'react-native-paper';
 import { Controller } from "react-hook-form";
 
 export interface Props {
@@ -21,17 +21,20 @@ const CInput: React.FC<Props> = ({control, name, label, style, rules = {}, place
                 control = {control}
                 name = {name}
                 rules = {rules}
-                render = {({field: {value, onBlur, onChange}}) => {
-                    return <TextInput 
-                        style={style}
-                        label={label}
-                        onBlur = {onBlur}
-                        onChangeText= {onChange}
-                        autoCorrect = {false}
-                        placeholder={placeholder}
-                        secureTextEntry = {secureTextEntry}
-                        value={value}
-                    />
+                render = {({field: {value, onBlur, onChange}, fieldState: {error}}) => {
+                    return <View style={style}>
+                                <TextInput 
+                                    label={label}
+                                    style = {{marginBottom: 5}}
+                                    onBlur = {onBlur}
+                                    onChangeText= {onChange}
+                                    autoCorrect = {false}
+                                    placeholder={placeholder}
+                                    secureTextEntry = {secureTextEntry}
+                                    value={value}
+                                />
+                                {error && (<Text style= {{color: 'red'}}>{error.message || 'error'}</Text>) }
+                            </View>
                 }}
             />
         </View>
