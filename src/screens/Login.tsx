@@ -5,6 +5,8 @@ import { Text, View, StyleSheet } from 'react-native';
 import CInput from '../components/CInput';
 import CButton from '../components/CButton';
 import { Button } from 'react-native-paper';
+import { Constants } from 'react-native-navigation';
+import { useNavigation } from '@react-navigation/native';
 
 
 
@@ -17,7 +19,7 @@ const Login = (props: any) => {
           password: ''
         }
       });
-      const onSubmit = (data: any) => {
+    const onSubmit = (data: any) => {
         console.log(data);
       }
       console.log('errors', errors);
@@ -38,6 +40,8 @@ const Login = (props: any) => {
                 </View>
                 <CInput
                     control = {control}
+                    style={{marginBottom: 30}}
+                    rules = {{required: true}}
                     placeholder= "Please enter your email..."
                     label = "email"
                     name = "email"
@@ -47,6 +51,8 @@ const Login = (props: any) => {
 
                 <CInput
                     control = {control}
+                    style={{marginBottom: 30}}
+                    rules = {{required: true}}
                     placeholder= "Please enter your password..."
                     label = "password"
                     name = "password"
@@ -61,9 +67,13 @@ const Login = (props: any) => {
                     mode="contained" onPress={handleSubmit(onSubmit)}/>
                 <View style={styles.bottomView}>
                     <Text style={styles.txt3}> Don't have an account? </Text>
-                    <Button style={{borderRadius: 8, width: 110, padding: 0}}  labelStyle={{fontSize: 12}} mode="outlined">
+                    <Button 
+                        style={{borderRadius: 8, width: 110, padding: 0}}  
+                        labelStyle={{fontSize: 12}} 
+                        mode="outlined"
+                        >
                         Sign Up
-                </Button>
+                    </Button>
                 </View>
             </View>
         </KeyboardAvoidingView>

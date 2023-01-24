@@ -5,12 +5,20 @@ import { Checkbox, TextInput } from 'react-native-paper';
 import { Button } from 'react-native-paper';
 import AntDesign from 'react-native-vector-icons/AntDesign'
 import Ionicons from 'react-native-vector-icons/Ionicons'
+import { Controller, useForm } from 'react-hook-form';
+import CInput from '../components/CInput';
 
-type Props = {}
-
-
-const SignUp = (props: Props) => {
-    const [checked, setChecked] = React.useState(false);
+const SignUp = (props: any) => {
+    const { handleSubmit, control, formState: { errors } } = useForm({
+        defaultValues: {
+          email: '',
+          password: ''
+        }
+      });
+    const onSubmit = (data: any) => {
+        console.log(data);
+      }
+      console.log('errors', errors);
     return (
         <KeyboardAvoidingView behavior="padding" >
             <View style = {styles.body}>
@@ -25,37 +33,81 @@ const SignUp = (props: Props) => {
                         <Text style={styles.txt}> Meetup </Text>
                 </View>
                 <View style={styles.form}>
-                    <TextInput style={{marginBottom: 23}}
+                    <CInput
+                        control = {control}
+                        style={{marginBottom: 23}}
+                        rules = {{required: true}}
                         label="First name"
                         placeholder="Your name..."
+                        name = "name"
+                        secureTextEntry = {false}
                     />
-                    <TextInput style={{marginBottom: 23}}
+                    <CInput
+                        control = {control}
+                        style={{marginBottom: 23}}
+                        rules = {{required: true}}
                         label="Last name"
                         placeholder="Your surname"
+                        name = "surname"
+                        secureTextEntry = {false}
                     />
-                    <TextInput style={{marginBottom: 23}}
+                    <CInput
+                        control = {control}
+                        style={{marginBottom: 23}}
+                        rules = {{required: true}}
                         label="username"
                         placeholder="Type your username..."
+                        name = "username"
+                        secureTextEntry = {false}
                     />
-                    <TextInput style={{marginBottom: 23}}
+                    <CInput
+                        control = {control}
+                        style={{marginBottom: 23}}
+                        rules = {{required: true}}
                         label="email"
                         placeholder="you@example.com"
+                        name = "email"
+                        secureTextEntry = {false}
                     />
-                    <TextInput style={{marginBottom: 23}}
+                    <CInput
+                        control = {control}
+                        style={{marginBottom: 23}}
+                        rules = {{required: true}}
                         label="password"
                         placeholder="Min. 8 characters"
+                        name = "password"
+                        secureTextEntry = {true}
                     />
-                    <TextInput style={{marginBottom: 23}}
+                    <CInput
+                        control = {control}
+                        style={{marginBottom: 23}}
+                        rules = {{required: true}}
                         label="confirm password"
                         placeholder="Min. 8 characters"
+                        name = "confirm-password"
+                        secureTextEntry = {true}
                     />
-                    <TextInput style={{marginBottom: 13}}
+                    <CInput
+                        control = {control}
+                        style={{marginBottom: 23}}
+                        rules = {{required: true}}
                         label="promo code"
                         placeholder="Enter promo code"
+                        name = "promocode"
+                        secureTextEntry = {false}
                     />
-                    <Button  style={{borderRadius: 70, marginBottom: 32, width: 80, height: 60, marginLeft: '75%' }} mode="contained" >
-                    <AntDesign name='arrowright' size={30}/>
-                    </Button>
+                    <Controller
+                        control = {control}
+                        name = ""
+                        render = {() => {
+                            return <Button 
+                                        style={{borderRadius: 70, marginBottom: 32, width: 80, height: 60, marginLeft: '75%' }}
+                                        mode= "contained"
+                                        onPress={handleSubmit(onSubmit)}>  
+                                        <AntDesign name='arrowright' size={30}/>
+                                    </Button>
+                        }}
+                    />
                     <View style={styles.bottomView}>
                         <Text style={styles.txt3}> Already have an account? </Text>
                         <Button  style={{borderRadius: 8, width: 110, padding: 0}}  labelStyle={{fontSize: 12}} mode="outlined">

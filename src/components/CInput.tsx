@@ -9,18 +9,21 @@ export interface Props {
     label: any; 
     placeholder: any; 
     secureTextEntry: any;
+    rules: any;
+    style: any;
 }
 
-const CInput: React.FC<Props> = ({control, name, label, placeholder, secureTextEntry}) => {
+const CInput: React.FC<Props> = ({control, name, label, style, rules = {}, placeholder, secureTextEntry}) => {
    
     return (
         <View>
             <Controller
                 control = {control}
                 name = {name}
+                rules = {rules}
                 render = {({field: {value, onBlur, onChange}}) => {
                     return <TextInput 
-                        style={{marginBottom: 30}}
+                        style={style}
                         label={label}
                         onBlur = {onBlur}
                         onChangeText= {onChange}
