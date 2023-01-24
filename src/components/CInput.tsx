@@ -24,6 +24,7 @@ const CInput: React.FC<Props> = ({control, name, label, placeholder, secureTextE
                         label={label}
                         onBlur = {onBlur}
                         onChangeText= {onChange}
+                        autoCorrect = {false}
                         placeholder={placeholder}
                         secureTextEntry = {secureTextEntry}
                         value={value}

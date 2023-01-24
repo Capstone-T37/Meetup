@@ -1,15 +1,17 @@
-import {  Button, Image, KeyboardAvoidingView} from 'react-native'
+import { Image, KeyboardAvoidingView } from 'react-native'
 import React from 'react'
 import { useForm } from "react-hook-form";
 import { Text, View, StyleSheet } from 'react-native';
 import CInput from '../components/CInput';
+import CButton from '../components/CButton';
+import { Button } from 'react-native-paper';
 
 
 
 
 const Login = (props: any) => {
 
-    const { register, setValue, handleSubmit, control, reset, formState: { errors } } = useForm({
+    const { handleSubmit, control, formState: { errors } } = useForm({
         defaultValues: {
           email: '',
           password: ''
@@ -17,14 +19,7 @@ const Login = (props: any) => {
       });
       const onSubmit = (data: any) => {
         console.log(data);
-      };
-    
-      const onChange = (arg: any) => {
-        return {
-          value: arg.nativeEvent.text,
-        };
-      };
-    
+      }
       console.log('errors', errors);
 
     return (
@@ -58,8 +53,18 @@ const Login = (props: any) => {
                     secureTextEntry = {true}
                 />
                 {errors.password && <Text>This is required.</Text>}
-                <Button title="Submit" onPress={handleSubmit(onSubmit)} />
-                
+                <CButton 
+                    content="Sign In"
+                    control={control}
+                    style= {{borderRadius: 8, marginBottom: 210}}
+                    name="button"
+                    mode="contained" onPress={handleSubmit(onSubmit)}/>
+                <View style={styles.bottomView}>
+                    <Text style={styles.txt3}> Don't have an account? </Text>
+                    <Button style={{borderRadius: 8, width: 110, padding: 0}}  labelStyle={{fontSize: 12}} mode="outlined">
+                        Sign Up
+                </Button>
+                </View>
             </View>
         </KeyboardAvoidingView>
     )
