@@ -133,7 +133,7 @@ const SignUp: React.FC<Props> = (props: Props) => {
                         name = ""
                         render = {() => {
                             return <Button 
-                                        style={{borderRadius: 70, marginBottom: 75, width: 70, height: 40, marginLeft: '75%' }}
+                                        style={{borderRadius: 70, marginBottom: 75, width: 70, height: 40, marginLeft: '75%'}}
                                         mode= "contained"
                                         onPress={handleSubmit(onSubmit)}>  
                                         <AntDesign name='arrowright' size={25}/>
@@ -176,13 +176,12 @@ const styles = StyleSheet.create({
         fontWeight: 'bold'
     },
     form: {
-        marginLeft: 25,
-        marginRight: 25,
+        alignSelf:'center'
     },
     bottomView: {
         flexDirection: 'row',
         flexWrap: 'wrap',
-        marginLeft: 12
+        alignSelf:'center'
     },
     txt3: {
         fontSize: 17,

@@ -139,7 +139,7 @@ const styles = StyleSheet.create({
     bottomView: {
         flexDirection: 'row',
         flexWrap: 'wrap',
-        marginLeft: 20
+        alignSelf: 'center'
     }
 })
 
