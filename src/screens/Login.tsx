@@ -5,7 +5,6 @@ import { Text, View, StyleSheet } from 'react-native';
 import CInput from '../components/CInput';
 import CButton from '../components/CButton';
 import { Button } from 'react-native-paper';
-import { Constants } from 'react-native-navigation';
 import { useNavigation } from '@react-navigation/native';
 
 
