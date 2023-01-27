@@ -25,27 +25,27 @@ const App = () => {
     <StoreProvider store={store}>
       <PaperProvider theme={theme}>
         <NavigationContainer>
-                    <Stack.Navigator>
-                        <Stack.Screen
-                            name="Login"
-                            component={Login}
-                            options={{ headerShown: false }}
-                        />
-                        <Stack.Screen
-                            name="SignUp"
-                            component={SignUp}
-                            options={{ headerShown: false }}
-                        />
-                        <Stack.Screen
-                            name="Session"
-                            component={BottomNavBar}
-                            options={{ headerShown: false }}
-                        />
-                    </Stack.Navigator>
-                </NavigationContainer>
+          <Stack.Navigator>
+            <Stack.Screen
+              name="Login"
+              component={Login}
+              options={{ headerShown: false }}
+            />
+            <Stack.Screen
+              name="SignUp"
+              component={SignUp}
+              options={{ headerShown: false }}
+            />
+            <Stack.Screen
+              name="Session"
+              component={BottomNavBar}
+              options={{ headerShown: false }}
+            />
+          </Stack.Navigator>
+        </NavigationContainer>
       </PaperProvider>
     </StoreProvider>
-    
+
   );
 };
 
