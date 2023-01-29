@@ -5,39 +5,61 @@ import { Text, View, StyleSheet } from 'react-native';
 import CInput from '../components/CInput';
 import CButton from '../components/CButton';
 import { Button } from 'react-native-paper';
-import { Constants } from 'react-native-navigation';
-import { useNavigation } from '@react-navigation/native';
-
-
+import { passwordRules, emailRules } from '../rules/login';
+import { styles } from '../styles/login'
+import { routes } from '../routes/routes';
 export interface Props {
     navigation: any;
 }
 
 const Login : React.FC<Props> = (props: Props) => {
 
-    const { handleSubmit, control, formState: { errors } } = useForm({
+    const { handleSubmit, control } = useForm({
         defaultValues: {
           email: '',
           password: ''
         }
       });
 
-    const emailRules = {
-        required: 'Your email is required',
-        pattern: {value: /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/g , message: 'invalid email'}
-    }
+    const onSubmit = async (data: any) => {
+        const domain = `${routes.localhost}${routes.login}`
+        data = {'email': data.email, 'password': data.password}
 
-    const passwordRules = {
-        required: 'Your password is required',
-        minLength: {value: 8, message: 'password should contain at least 8 characters'},
-        maxLength: {value: 20, message: 'password should contain at most 20 characters'}
-    }
+        const requestOptions = {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(data)
+        };
 
-    const onSubmit = (data: any) => {
-        console.log(data);
-        props.navigation.push("Session")
+        try {
+            await fetch(
+                domain, requestOptions)
+                .then(response => {
+                    console.log(response.status)
+                    response.json()
+                        .then(responseData => {
+                            switch(response.status) { 
+                                case 401: { 
+                                    console.log('login unsucessfull :('); 
+                                    break; 
+                                } 
+                                case 200: { 
+                                    console.log('login sucess:'+ responseData.token); 
+                                    break; 
+                                } 
+                                default: {  
+                                    break; 
+                                } 
+                             } 
+                            
+                        });
+                })
+        }
+        catch (error) {
+            console.error('loginError:'+ error);
+        }
+        //props.navigation.push("Session")
       }
-      console.log('errors', errors);
 
     return (
         <KeyboardAvoidingView behavior="padding" >
@@ -98,49 +120,5 @@ const Login : React.FC<Props> = (props: Props) => {
         </KeyboardAvoidingView>
     )
 }
-
-const styles = StyleSheet.create({
-    body: {
-        marginTop: 60,
-        marginLeft: 25,
-        marginRight: 25,
-    },
-
-    stretch: {
-        width: 50,
-        height: 50,
-
-      },
-    txt: {
-        fontSize: 30,
-        paddingTop: 5,
-        fontWeight: 'bold'
-    },
-    container: {
-        flexDirection: 'row',
-        flexWrap: 'wrap',
-        marginBottom: 100
-    } ,
-    txt1: {
-        fontSize: 27,
-        fontWeight: 'bold'
-    }
-    ,
-    txt2: {
-        fontSize: 27,
-        fontWeight: 'bold',
-        color: 'grey'
-    }, 
-    txt3: {
-        fontSize: 17,
-        color: 'grey',
-        paddingTop:10
-    },
-    bottomView: {
-        flexDirection: 'row',
-        flexWrap: 'wrap',
-        alignSelf: 'center'
-    }
-})
 
 export default Login
