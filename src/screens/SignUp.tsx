@@ -22,7 +22,8 @@ const SignUp: React.FC<Props> = (props: Props) => {
           email: '',
           password: '',
           confirmPassword: '',
-          promocode: ''
+          promocode: '',
+          submitButton:''
         }
       });
 
@@ -144,7 +145,7 @@ const SignUp: React.FC<Props> = (props: Props) => {
                     />
                     <Controller
                         control = {control}
-                        name = ""
+                        name = "submitButton"
                         render = {() => {
                             return <Button 
                                         style={{borderRadius: 70, marginBottom: 75, width: 70, height: 40, marginLeft: '75%'}}
