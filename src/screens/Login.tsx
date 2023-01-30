@@ -28,23 +28,30 @@ const Login : React.FC<Props> = (props: Props) => {
 
     const signInWIthCredentials = async (data: any) => {
         const domain : string = `${routes.localhost}${routes.login}`
-        console.log(domain)
         data = {email: data.email, password: data.password}
-        console.log(await postToBackend(data, domain))
-        // console.log(res)
-        // switch(res?.status) { 
-        //     case 401: { 
-        //         return <Popup content="Login was unseccussfull"></Popup>
-        //     } 
-        //     case 200: { 
-        //         async () => { asyncStore(res.token) };
-        //         props.navigation.push("Session")
-        //         break; 
-        //     } 
-        //     default: {  
-        //         break; 
-        //     } 
-        //  } 
+        postToBackend(data, domain).then( (res)=>{
+
+            switch(res?.status) { 
+                case 401: { 
+                    console.log("hey");
+
+                    return <Popup content="Login was unseccussfull"></Popup>
+                } 
+                case 200: { 
+                    res.json().then((js)=>{
+                        async () => { asyncStore(js.token) };
+                    props.navigation.push("Session")
+                    }
+                    )
+                    break; 
+                } 
+                default: {  
+                    break; 
+                } 
+             } 
+        }).catch((e)=>console.log(e))
+        
+        
     }
 
     return (
