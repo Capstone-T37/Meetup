@@ -1,13 +1,17 @@
 import { Image, KeyboardAvoidingView } from 'react-native'
 import React from 'react'
 import { useForm } from "react-hook-form";
-import { Text, View, StyleSheet } from 'react-native';
+import { Text, View } from 'react-native';
 import CInput from '../components/CInput';
 import CButton from '../components/CButton';
-import { Button } from 'react-native-paper';
+import { Button, Dialog, Portal } from 'react-native-paper';
 import { passwordRules, emailRules } from '../rules/login';
 import { styles } from '../styles/login'
 import { routes } from '../routes/routes';
+import { postToBackend } from '../services/service';
+import { asyncStore } from '../services/service';
+import Popup from '../components/Popup';
+
 export interface Props {
     navigation: any;
 }
@@ -21,45 +25,27 @@ const Login : React.FC<Props> = (props: Props) => {
         }
       });
 
-    const onSubmit = async (data: any) => {
-        const domain = `${routes.localhost}${routes.login}`
-        data = {'email': data.email, 'password': data.password}
 
-        const requestOptions = {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(data)
-        };
-
-        try {
-            await fetch(
-                domain, requestOptions)
-                .then(response => {
-                    console.log(response.status)
-                    response.json()
-                        .then(responseData => {
-                            switch(response.status) { 
-                                case 401: { 
-                                    console.log('login unsucessfull :('); 
-                                    break; 
-                                } 
-                                case 200: { 
-                                    console.log('login sucess:'+ responseData.token); 
-                                    break; 
-                                } 
-                                default: {  
-                                    break; 
-                                } 
-                             } 
-                            
-                        });
-                })
-        }
-        catch (error) {
-            console.error('loginError:'+ error);
-        }
-        //props.navigation.push("Session")
-      }
+    const signInWIthCredentials = async (data: any) => {
+        const domain : string = `${routes.localhost}${routes.login}`
+        console.log(domain)
+        data = {email: data.email, password: data.password}
+        console.log(await postToBackend(data, domain))
+        // console.log(res)
+        // switch(res?.status) { 
+        //     case 401: { 
+        //         return <Popup content="Login was unseccussfull"></Popup>
+        //     } 
+        //     case 200: { 
+        //         async () => { asyncStore(res.token) };
+        //         props.navigation.push("Session")
+        //         break; 
+        //     } 
+        //     default: {  
+        //         break; 
+        //     } 
+        //  } 
+    }
 
     return (
         <KeyboardAvoidingView behavior="padding" >
@@ -103,8 +89,7 @@ const Login : React.FC<Props> = (props: Props) => {
                     style= {{borderRadius: 8, marginBottom: 180}}
                     name="button"
                     mode="contained" 
-                    onPress={handleSubmit(onSubmit)}/>
-                    
+                    onPress={handleSubmit(signInWIthCredentials)}/>
                 <View style={styles.bottomView}>
                     <Text style={styles.txt3}> Don't have an account? </Text>
                     <Button 
@@ -116,6 +101,7 @@ const Login : React.FC<Props> = (props: Props) => {
                         Sign Up
                     </Button>
                 </View>
+                
             </View>
         </KeyboardAvoidingView>
     )

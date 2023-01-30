@@ -9,6 +9,9 @@ import { Controller, useForm } from 'react-hook-form';
 import CInput from '../components/CInput';
 import {emailRules, passwordRules, confirmPwdRules} from '../rules/signUp'
 import { routes } from '../routes/routes';
+import { postToBackend } from '../services/service';
+import { asyncStore } from '../services/service';
+import Popup from '../components/Popup';
 export interface Props {
     navigation: any;
 }
@@ -27,40 +30,25 @@ const SignUp: React.FC<Props> = (props: Props) => {
         }
       });
 
-    const onSubmit = async (data: any) => {
-        const domain = `${routes.localhost}${routes.signup}`
-        data = {'email': data.email, 'password': data.password}
-        const requestOptions = {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(data)
-        };
-        try {
-            await fetch(
-                domain, requestOptions)
-                .then(response => {
-                    response.json()
-                        .then(responseData => {
-                            switch(response.status) { 
-                                case 401: { 
-                                    console.log('sign up unsucessfull :('); 
-                                    break; 
-                                } 
-                                case 200: { 
-                                    console.log('sign up sucess:'+ responseData.token); 
-                                    break; 
-                                } 
-                                default: {  
-                                    break; 
-                                } 
-                             } 
-                        });
-                })
-        }
-        catch (error) {
-            console.error('Sign up Error:'+ error);
-        }
-        //props.navigation.push("Session")
+    const signUpWIthCredentials = async (data: any) => {
+        const domain : string = `${routes.localhost}${routes.signup}`
+        data = {email: data.email, password: data.password}
+        postToBackend(data, domain).then((res: any) => {
+            switch(res.status) { 
+                case 401: { 
+                    return <Popup content="Sign up was unseccussfull"></Popup> 
+                } 
+                case 200: { 
+                    console.log('signup sucess:'+ res.token);
+                    async () => { asyncStore(res.token) };
+                    props.navigation.push("Session") 
+                    break; 
+                } 
+                default: {  
+                    break; 
+                } 
+             } 
+        })
       }
 
     return (
@@ -150,7 +138,7 @@ const SignUp: React.FC<Props> = (props: Props) => {
                             return <Button 
                                         style={{borderRadius: 70, marginBottom: 75, width: 70, height: 40, marginLeft: '75%'}}
                                         mode= "contained"
-                                        onPress={handleSubmit(onSubmit)}>  
+                                        onPress={handleSubmit(signUpWIthCredentials)}>  
                                         <AntDesign name='arrowright' size={25}/>
                                     </Button>
                         }}
