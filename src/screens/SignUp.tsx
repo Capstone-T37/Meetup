@@ -30,22 +30,17 @@ const SignUp: React.FC<Props> = (props: Props) => {
         }
       });
 
-    const signUpWIthCredentials = async (data: any) => {
+      const signUpWIthCredentials = async (data: any) => {
         const domain : string = `${routes.localhost}${routes.signup}`
         data = {email: data.email, password: data.password}
-        postToBackend(data, domain).then( (res)=>{
-            console.log(res.status)
+        postToBackend(data, domain).then( async (res)=>{
             switch(res?.status) { 
                 case 401: { 
                     return <Popup content="Sign up was unseccussfull"></Popup>
                 } 
                 case 200: { 
-                    res.json().then((js)=>{
-                        async () => { 
-                            asyncStore(js.token) 
-                            };
-                        }
-                    )
+                    let val = await res.json()
+                    await asyncStore(val.token)
                     props.navigation.push("Session")
                     break; 
                 } 

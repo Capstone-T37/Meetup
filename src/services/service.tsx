@@ -14,7 +14,7 @@ export const postToBackend = async (data: any, domain: RequestInfo):Promise<Resp
 
 export const asyncStore = async (value: any) => {
     try {
-      await AsyncStorage.setItem('@token', value)
+      await AsyncStorage.setItem('mytoken', value)
     } catch (e) {
         console.log("Token could not be saved!")
     }
