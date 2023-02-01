@@ -30,19 +30,18 @@ const Login : React.FC<Props> = (props: Props) => {
         const domain : string = `${routes.localhost}${routes.login}`
         data = {email: data.email, password: data.password}
         postToBackend(data, domain).then( (res)=>{
-
             switch(res?.status) { 
                 case 401: { 
-                    console.log("hey");
-
                     return <Popup content="Login was unseccussfull"></Popup>
                 } 
                 case 200: { 
                     res.json().then((js)=>{
-                        async () => { asyncStore(js.token) };
-                    props.navigation.push("Session")
-                    }
+                        async () => { 
+                            asyncStore(js.token) 
+                            };
+                        }
                     )
+                    props.navigation.push("Session")
                     break; 
                 } 
                 default: {  
@@ -50,8 +49,6 @@ const Login : React.FC<Props> = (props: Props) => {
                 } 
              } 
         }).catch((e)=>console.log(e))
-        
-        
     }
 
     return (
