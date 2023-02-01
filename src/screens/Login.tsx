@@ -4,6 +4,7 @@ import { useForm } from "react-hook-form";
 import { Text, View } from 'react-native';
 import CInput from '../components/CInput';
 import CButton from '../components/CButton';
+
 import { Button, Dialog, Portal } from 'react-native-paper';
 import { passwordRules, emailRules } from '../rules/login';
 import { styles } from '../styles/login'
@@ -11,6 +12,7 @@ import { routes } from '../routes/routes';
 import { postToBackend } from '../services/service';
 import { asyncStore } from '../services/service';
 import Popup from '../components/Popup';
+
 
 export interface Props {
     navigation: any;
