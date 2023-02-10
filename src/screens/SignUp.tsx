@@ -1,19 +1,23 @@
 
-import { View, Text , StyleSheet, Image, KeyboardAvoidingView} from 'react-native'
+import { View, Text , Image, KeyboardAvoidingView} from 'react-native'
 import React from 'react'
-import { Checkbox, TextInput } from 'react-native-paper';
+import { styles } from '../styles/signUp';
 import { Button } from 'react-native-paper';
 import AntDesign from 'react-native-vector-icons/AntDesign'
 import Ionicons from 'react-native-vector-icons/Ionicons'
 import { Controller, useForm } from 'react-hook-form';
 import CInput from '../components/CInput';
-
+import {emailRules, passwordRules, confirmPwdRules} from '../rules/signUp'
+import { routes } from '../routes/routes';
+import { postToBackend } from '../services/service';
+import { asyncStore } from '../services/service';
+import Popup from '../components/Popup';
 export interface Props {
     navigation: any;
 }
 
 const SignUp: React.FC<Props> = (props: Props) => {
-    const { handleSubmit, control, formState: { errors } } = useForm({
+    const { handleSubmit, control } = useForm({
         defaultValues: {
           name: '',
           surname: '',
@@ -26,29 +30,27 @@ const SignUp: React.FC<Props> = (props: Props) => {
         }
       });
 
-    const onSubmit = (data: any) => {
-        console.log(data);
-        props.navigation.push("Session")
+      const signUpWIthCredentials = async (data: any) => {
+        const domain : string = `${routes.localhost}${routes.signup}`
+        data = {email: data.email, password: data.password}
+        postToBackend(data, domain).then( async (res)=>{
+            switch(res?.status) { 
+                case 401: { 
+                    return <Popup content="Sign up was unseccussfull"></Popup>
+                } 
+                case 200: { 
+                    let val = await res.json()
+                    await asyncStore(val.token)
+                    props.navigation.push("Session")
+                    break; 
+                } 
+                default: {  
+                    break; 
+                } 
+             } 
+        }).catch((e)=>console.log(e))
       }
 
-    const emailRules = {
-        required: 'Your email is required',
-        pattern: {value: /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/g , message: 'invalid email'}
-    }
-
-    const passwordRules = {
-        required: 'Your password is required',
-        minLength: {value: 8, message: 'password should contain at least 8 characters'},
-        maxLength: {value: 20, message: 'password should contain at most 20 characters'}
-    }
-
-    const confirmPwdRules = {
-        required: 'Your password is required',
-        validate: (value: any, formValues: any) => value === formValues.password || 'passwords are not matching'
-    }
-
-    
-    
     return (
         <KeyboardAvoidingView behavior="padding" >
             <View style = {styles.body}>
@@ -136,7 +138,7 @@ const SignUp: React.FC<Props> = (props: Props) => {
                             return <Button 
                                         style={{borderRadius: 70, marginBottom: 75, width: 70, height: 40, marginLeft: '75%'}}
                                         mode= "contained"
-                                        onPress={handleSubmit(onSubmit)}>  
+                                        onPress={handleSubmit(signUpWIthCredentials)}>  
                                         <AntDesign name='arrowright' size={25}/>
                                     </Button>
                         }}
@@ -158,41 +160,4 @@ const SignUp: React.FC<Props> = (props: Props) => {
     )
 }
 
-const styles = StyleSheet.create({
-    body: {
-        marginTop: 60,
-    }, 
-    stretch: {
-        width: 40,
-        height: 40,       
-      },
-    container: {
-        flexDirection: 'row',
-        flexWrap: 'wrap',
-        marginBottom: 12
-    } ,
-    txt: {
-        fontSize: 25,
-        paddingTop: 5,
-        fontWeight: 'bold'
-    },
-    form: {
-        alignSelf:'center'
-    },
-    bottomView: {
-        flexDirection: 'row',
-        flexWrap: 'wrap',
-        alignSelf:'center'
-    },
-    txt3: {
-        fontSize: 17,
-        color: 'grey',
-        paddingTop:10
-    },
-
-})
 export default SignUp
-
-function register(arg0: string): { onChange: any; onBlur: any; name: any; ref: any; } {
-    throw new Error('Function not implemented.');
-}

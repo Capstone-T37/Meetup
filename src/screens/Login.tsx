@@ -1,11 +1,17 @@
 import { Image, KeyboardAvoidingView } from 'react-native'
 import React from 'react'
 import { useForm } from "react-hook-form";
-import { Text, View, StyleSheet } from 'react-native';
+import { Text, View } from 'react-native';
 import CInput from '../components/CInput';
 import CButton from '../components/CButton';
-import { Button } from 'react-native-paper';
-import { useNavigation } from '@react-navigation/native';
+
+import { Button, Dialog, Portal } from 'react-native-paper';
+import { passwordRules, emailRules } from '../rules/login';
+import { styles } from '../styles/login'
+import { routes } from '../routes/routes';
+import { postToBackend } from '../services/service';
+import { asyncStore } from '../services/service';
+import Popup from '../components/Popup';
 
 
 export interface Props {
@@ -14,29 +20,34 @@ export interface Props {
 
 const Login : React.FC<Props> = (props: Props) => {
 
-    const { handleSubmit, control, formState: { errors } } = useForm({
+    const { handleSubmit, control } = useForm({
         defaultValues: {
           email: '',
           password: ''
         }
       });
 
-    const emailRules = {
-        required: 'Your email is required',
-        pattern: {value: /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/g , message: 'invalid email'}
-    }
 
-    const passwordRules = {
-        required: 'Your password is required',
-        minLength: {value: 8, message: 'password should contain at least 8 characters'},
-        maxLength: {value: 20, message: 'password should contain at most 20 characters'}
+      const signInWIthCredentials = async (data: any) => {
+        const domain : string = `${routes.localhost}${routes.login}`
+        data = {email: data.email, password: data.password}
+        postToBackend(data, domain).then( async (res)=>{
+            switch(res?.status) { 
+                case 401: { 
+                    return <Popup content="Login was unseccussfull"></Popup>
+                } 
+                case 200: { 
+                    let val = await res.json()
+                    await asyncStore(val.token)
+                    props.navigation.push("Session")
+                    break; 
+                } 
+                default: {  
+                    break; 
+                } 
+             } 
+        }).catch((e)=>console.log(e))
     }
-
-    const onSubmit = (data: any) => {
-        console.log(data);
-        props.navigation.push("Session")
-      }
-      console.log('errors', errors);
 
     return (
         <KeyboardAvoidingView behavior="padding" >
@@ -80,8 +91,7 @@ const Login : React.FC<Props> = (props: Props) => {
                     style= {{borderRadius: 8, marginBottom: 180}}
                     name="button"
                     mode="contained" 
-                    onPress={handleSubmit(onSubmit)}/>
-                    
+                    onPress={handleSubmit(signInWIthCredentials)}/>
                 <View style={styles.bottomView}>
                     <Text style={styles.txt3}> Don't have an account? </Text>
                     <Button 
@@ -93,53 +103,10 @@ const Login : React.FC<Props> = (props: Props) => {
                         Sign Up
                     </Button>
                 </View>
+                
             </View>
         </KeyboardAvoidingView>
     )
 }
-
-const styles = StyleSheet.create({
-    body: {
-        marginTop: 60,
-        marginLeft: 25,
-        marginRight: 25,
-    },
-
-    stretch: {
-        width: 50,
-        height: 50,
-
-      },
-    txt: {
-        fontSize: 30,
-        paddingTop: 5,
-        fontWeight: 'bold'
-    },
-    container: {
-        flexDirection: 'row',
-        flexWrap: 'wrap',
-        marginBottom: 100
-    } ,
-    txt1: {
-        fontSize: 27,
-        fontWeight: 'bold'
-    }
-    ,
-    txt2: {
-        fontSize: 27,
-        fontWeight: 'bold',
-        color: 'grey'
-    }, 
-    txt3: {
-        fontSize: 17,
-        color: 'grey',
-        paddingTop:10
-    },
-    bottomView: {
-        flexDirection: 'row',
-        flexWrap: 'wrap',
-        alignSelf: 'center'
-    }
-})
 
 export default Login
