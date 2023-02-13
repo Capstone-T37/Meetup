@@ -3,19 +3,46 @@ import React from 'react'
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import Feather from 'react-native-vector-icons/Feather';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
+import { Button, Menu, Divider, Provider } from 'react-native-paper';
 
 
-type Props = {}
+type Props = {
+    navigation: any;
+}
 
 const ProfileScreen = (props: Props) => {
+
+  const [visible, setVisible] = React.useState(false);
+
+  const openMenu = () => setVisible(true);
+
+  const closeMenu = () => setVisible(false);
+
   return (
     <SafeAreaView style={styles.container}>
             <ScrollView showsVerticalScrollIndicator={false}>
                 <View style={styles.titleBar}>
-                    <Ionicons name="ios-arrow-back" size={24} color="#52575D"></Ionicons>
-                    <Feather name="more-vertical" size={24} color="#52575D"></Feather>
-                </View>
-
+                    <Ionicons name="ios-arrow-back" size={24} onPress={() => props.navigation.goBack()} color="#52575D"></Ionicons>
+                    <Provider>
+                    <View
+                            style={{
+                    
+                            flexDirection: 'row',
+                            justifyContent: 'flex-end',
+                            }}>
+                            <Menu
+                            style ={{padding: 0}}
+                            visible={visible}
+                            onDismiss={closeMenu}
+                            anchor={<Feather name="more-vertical" onPress={openMenu} size={24} color="#52575D"></Feather>}>
+                            <Menu.Item onPress={() => props.navigation.push("Login")} title="Log out" />
+                            </Menu>
+                    </View>
+                </Provider>
+                    
+                </View> 
+                
+                
                 <View style={{ alignSelf: "center" }}>
                     <View style={styles.profileImage}>
                         <Image source={require("../assets/test.png")} style={styles.image} resizeMode='center'></Image>
