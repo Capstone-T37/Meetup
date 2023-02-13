@@ -72,6 +72,7 @@ const Login : React.FC<Props> = (props: Props) => {
                     placeholder= "Please enter your email..."
                     label = "email"
                     name = "email"
+                    editable = {true}
                     secureTextEntry = {false}
                 />
 
@@ -82,6 +83,7 @@ const Login : React.FC<Props> = (props: Props) => {
                     placeholder= "Please enter your password..."
                     label = "password"
                     name = "password"
+                    editable = {true}
                     secureTextEntry = {true}
                 />
 

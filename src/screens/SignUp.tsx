@@ -2,7 +2,7 @@
 import { View, Text , Image, KeyboardAvoidingView} from 'react-native'
 import React from 'react'
 import { styles } from '../styles/signUp';
-import { Button } from 'react-native-paper';
+import { Button, TextInput } from 'react-native-paper';
 import AntDesign from 'react-native-vector-icons/AntDesign'
 import Ionicons from 'react-native-vector-icons/Ionicons'
 import { Controller, useForm } from 'react-hook-form';
@@ -19,14 +19,7 @@ export interface Props {
 const SignUp: React.FC<Props> = (props: Props) => {
     const { handleSubmit, control } = useForm({
         defaultValues: {
-          name: '',
-          surname: '',
-          username: '',
-          email: '',
-          password: '',
-          confirmPassword: '',
-          promocode: '',
-          submitButton:''
+          phonenum: ''
         }
       });
 
@@ -68,69 +61,32 @@ const SignUp: React.FC<Props> = (props: Props) => {
                         <Text style={styles.txt}> Meetup </Text>
                 </View>
                 <View style={styles.form}>
+                    <Text style={styles.txt1}> Phone number: </Text>
+                    <View  style={{flexDirection: 'row', flexWrap: 'nowrap',width: '100%'}}>
                     <CInput
                         control = {control}
-                        style={{marginBottom: 12}}
+                        style={{}}
                         rules = {{required: 'your first name is required'}}
-                        label="First name"
-                        placeholder="Your name..."
-                        name = "name"
+                        placeholder= "CA +1"
+                        label = ""
+                        editable = {false}
+                        name = "CA"
                         secureTextEntry = {false}
                     />
-                    <CInput
+                        
+                        <CInput
                         control = {control}
-                        style={{marginBottom: 12}}
-                        rules = {{required: 'your last name is required'}}
-                        label="Last name"
-                        placeholder="Your surname"
-                        name = "surname"
+                        style={{marginBottom:'20%'}}
+                        editable = {true}
+                        rules = {{required: 'your first name is required'}}
+                        placeholder= "Please enter your phone number"
+                        label = "phonenum"
+                        name = "phonenum"
                         secureTextEntry = {false}
                     />
-                    <CInput
-                        control = {control}
-                        style={{marginBottom: 12}}
-                        rules = {{required: 'your username is required'}}
-                        label="username"
-                        placeholder="Type your username..."
-                        name = "username"
-                        secureTextEntry = {false}
-                    />
-                    <CInput
-                        control = {control}
-                        style={{marginBottom: 12}}
-                        rules = {emailRules}
-                        label="email"
-                        placeholder="you@example.com"
-                        name = "email"
-                        secureTextEntry = {false}
-                    />
-                    <CInput
-                        control = {control}
-                        style={{marginBottom: 12}}
-                        rules = {passwordRules}
-                        label="password"
-                        placeholder="Min. 8 characters"
-                        name = "password"
-                        secureTextEntry = {true}
-                    />
-                    <CInput
-                        control = {control}
-                        style={{marginBottom: 12}}
-                        rules = {confirmPwdRules}
-                        label="confirm password"
-                        placeholder="Min. 8 characters"
-                        name = "confirmPassword"
-                        secureTextEntry = {true}
-                    />
-                    <CInput
-                        control = {control}
-                        style={{marginBottom: 12}}
-                        rules = {{required: false}}
-                        label="promo code"
-                        placeholder="Enter promo code"
-                        name = "promocode"
-                        secureTextEntry = {false}
-                    />
+                    
+                </View>
+                    <Text style={styles.txt2}> We will send a text with a verification code. Message and data rates may apply. Learn what happens when your number changes. </Text>
                     <Controller
                         control = {control}
                         name = "submitButton"
@@ -143,6 +99,7 @@ const SignUp: React.FC<Props> = (props: Props) => {
                                     </Button>
                         }}
                     />
+                    </View>
                     <View style={styles.bottomView}>
                         <Text style={styles.txt3}> Already have an account? </Text>
                         <Button  
@@ -153,7 +110,7 @@ const SignUp: React.FC<Props> = (props: Props) => {
                             Sign In
                         </Button>
                     </View>
-                </View>
+                
                 
             </View>
         </KeyboardAvoidingView>
