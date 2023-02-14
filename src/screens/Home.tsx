@@ -8,6 +8,7 @@ import PermissionAsk from '../components/PermissionAsk'
 import { useDispatch, useSelector } from 'react-redux'
 import { RootState } from '../redux/store'
 import { setPermission } from '../redux/slices/permissionSlice'
+import { check, PERMISSIONS } from 'react-native-permissions'
 
 
 type Props = {}
@@ -16,7 +17,7 @@ const Home = (rops: Props) => {
     const dispatch = useDispatch()
     const permitted = useSelector((state: RootState) => state.permission.whenInUse)
     useEffect(() => {
-        (() => checkForPermission().then((res) =>dispatch(setPermission(res))))()
+        (() => checkForPermission().then((res) => dispatch(setPermission(res))))();
     }, [])
     return (
         <SafeAreaView style={styles.container}>

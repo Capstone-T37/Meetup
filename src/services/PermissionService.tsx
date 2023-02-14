@@ -12,6 +12,7 @@ async function checkPermission(permission: Permission): Promise<boolean> {
 
   var isPermissionGranted = false;
   let result = await check(permission);
+  
   if (result === RESULTS.DENIED) result = await request(permission);
   switch (result) {
     case RESULTS.GRANTED:
