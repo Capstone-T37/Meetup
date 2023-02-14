@@ -9,8 +9,8 @@ import { Controller, useForm } from 'react-hook-form';
 import CInput from '../components/CInput';
 import {emailRules, passwordRules, confirmPwdRules} from '../rules/signUp'
 import { routes } from '../routes/routes';
-import { postToBackend } from '../services/service';
-import { asyncStore } from '../services/service';
+import { postToBackend } from '../services/ApiService';
+import { asyncStore } from '../services/ApiService';
 import Popup from '../components/Popup';
 export interface Props {
     navigation: any;

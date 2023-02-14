@@ -1,9 +1,10 @@
 import { configureStore } from '@reduxjs/toolkit'
 import testReducer from './slices/counterSlice'
-
+import permissionReducer from './slices/permissionSlice'
 export const store = configureStore({
   reducer: {
     counter: testReducer,
+    permission: permissionReducer
   },
 })
 

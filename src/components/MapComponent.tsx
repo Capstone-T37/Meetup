@@ -20,6 +20,7 @@ const MapComponent = (props: Props) => {
             provider={Platform.OS=='android'? 'google':undefined}
                 style={{ height:"100%",width:"100%" }}
                 initialRegion={INITIAL_REGION}
+                showsUserLocation={true}
             >
                 <Marker coordinate={{ latitude: 52.4001, longitude: 18.70 }} />
                 <Marker coordinate={{ latitude: 52.4002, longitude: 18.72 }} />
