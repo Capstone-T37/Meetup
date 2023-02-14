@@ -7,10 +7,12 @@ export const styles = StyleSheet.create({
     }, 
     txt1: {
         fontSize: 27,
+        marginBottom:17,
         fontWeight: 'bold'
     },
     txt2: {
         fontSize: 13,
+        
         color: 'grey',
         marginBottom: 40
     },
@@ -30,8 +32,8 @@ export const styles = StyleSheet.create({
     },
     form: {
         alignSelf:'center',
-        marginLeft: '15%',
-        marginRight: '15%',
+        marginLeft: '10%',
+        marginRight: '10%',
         
         
         
@@ -41,7 +43,7 @@ export const styles = StyleSheet.create({
         flexWrap: 'wrap',
         alignSelf:'center',
         alignItems:'flex-start',
-         marginTop: '60%',
+         marginTop: '50%',
         
         
     },
@@ -50,5 +52,8 @@ export const styles = StyleSheet.create({
         color: 'grey',
         paddingTop:10
     },
+    txt4: {
+        marginBottom: 30
+    }
 
 })

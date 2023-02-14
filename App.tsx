@@ -8,6 +8,8 @@ import Login from './src/screens/Login';
 import { MD3LightTheme as DefaultTheme, Provider as PaperProvider } from 'react-native-paper';
 import SignUp from './src/screens/SignUp';
 import { NavigationContainer } from '@react-navigation/native';
+import Verif from './src/screens/Verif';
+
 
 const theme = {
   ...DefaultTheme,
@@ -39,6 +41,11 @@ const App = () => {
             <Stack.Screen
               name="Session"
               component={BottomNavBar}
+              options={{ headerShown: false }}
+            />
+            <Stack.Screen
+              name="Verification"
+              component={Verif}
               options={{ headerShown: false }}
             />
           </Stack.Navigator>

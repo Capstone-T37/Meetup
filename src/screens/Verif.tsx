@@ -1,13 +1,11 @@
-
 import { View, Text , Image, KeyboardAvoidingView} from 'react-native'
 import React from 'react'
-import { styles } from '../styles/signUp';
+import { styles } from '../styles/verification';
 import { Button, TextInput } from 'react-native-paper';
 import AntDesign from 'react-native-vector-icons/AntDesign'
 import Ionicons from 'react-native-vector-icons/Ionicons'
 import { Controller, useForm } from 'react-hook-form';
 import CInput from '../components/CInput';
-import {emailRules, passwordRules, confirmPwdRules} from '../rules/signUp'
 import { routes } from '../routes/routes';
 import { postToBackend } from '../services/service';
 import { asyncStore } from '../services/service';
@@ -16,33 +14,32 @@ export interface Props {
     navigation: any;
 }
 
-const SignUp: React.FC<Props> = (props: Props) => {
+const Verif: React.FC<Props> = (props: Props) => {
     const { handleSubmit, control } = useForm({
         defaultValues: {
-          phonenum: ''
+          code: ''
         }
       });
 
       const signUpWIthCredentials = async (data: any) => {
-        // const domain : string = `${routes.localhost}${routes.signup}`
-        // data = {email: data.email, password: data.password}
-        // postToBackend(data, domain).then( async (res)=>{
-        //     switch(res?.status) { 
-        //         case 401: { 
-        //             return <Popup content="Sign up was unseccussfull"></Popup>
-        //         } 
-        //         case 200: { 
-        //             let val = await res.json()
-        //             await asyncStore(val.token)
-        //             props.navigation.push("Session")
-        //             break; 
-        //         } 
-        //         default: {  
-        //             break; 
-        //         } 
-        //      } 
-        // }).catch((e)=>console.log(e))
-        props.navigation.push("Verification")
+        const domain : string = `${routes.localhost}${routes.signup}`
+        data = {email: data.email, password: data.password}
+        postToBackend(data, domain).then( async (res)=>{
+            switch(res?.status) { 
+                case 401: { 
+                    return <Popup content="Sign up was unseccussfull"></Popup>
+                } 
+                case 200: { 
+                    let val = await res.json()
+                    await asyncStore(val.token)
+                    props.navigation.push("Session")
+                    break; 
+                } 
+                default: {  
+                    break; 
+                } 
+             } 
+        }).catch((e)=>console.log(e))
       }
 
     return (
@@ -62,32 +59,24 @@ const SignUp: React.FC<Props> = (props: Props) => {
                         <Text style={styles.txt}> Meetup </Text>
                 </View>
                 <View style={styles.form}>
-                    <Text style={styles.txt1}> Phone number: </Text>
+                    <Text style={styles.txt1}> Verify your number </Text>
+                    <Text style={styles.txt4}> Enter the code we've sent by text to +158197816666. <Text style={{textDecorationLine: 'underline',}}>Change</Text> </Text>
                     <View  style={{flexDirection: 'row', flexWrap: 'nowrap',width: '100%'}}>
-                    <CInput
-                        control = {control}
-                        style={{}}
-                        rules = {{}}
-                        placeholder= "CA +1"
-                        label = ""
-                        editable = {false}
-                        name = "CA"
-                        secureTextEntry = {false}
-                    />
                         
                         <CInput
                         control = {control}
-                        style={{marginBottom:'20%', width: 270}}
+                        style={{marginBottom:'27%', width: 200}}
                         editable = {true}
                         rules = {{required: 'your first name is required'}}
-                        placeholder= "Please enter your phone number"
-                        label = "phonenum"
-                        name = "phonenum"
+                        placeholder= "Please enter the code"
+                        label = "code"
+                        name = "code"
                         secureTextEntry = {false}
                     />
                     
+                    
                 </View>
-                    <Text style={styles.txt2}> We will send a text with a verification code. Message and data rates may apply. Learn what happens when your number changes. </Text>
+                <Text style={styles.txt4}> Didn't get a text? </Text>
                     <Controller
                         control = {control}
                         name = "submitButton"
@@ -118,4 +107,4 @@ const SignUp: React.FC<Props> = (props: Props) => {
     )
 }
 
-export default SignUp
+export default Verif
