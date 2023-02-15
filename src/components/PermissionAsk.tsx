@@ -1,5 +1,5 @@
 import { StyleSheet, Text, View } from 'react-native'
-import React from 'react'
+import React, { useEffect } from 'react'
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import SimpleLineIcons from 'react-native-vector-icons/SimpleLineIcons';
 import Feather from 'react-native-vector-icons/Feather';
@@ -103,6 +103,6 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
         fontSize: 15,
     },
-    button: { position: 'absolute', bottom: 0, justifyContent: 'center', width: '100%',paddingLeft:20,paddingRight:20 }
+    button: { position: 'absolute', bottom: 0, justifyContent: 'center', width: '100%', paddingLeft: 20, paddingRight: 20 }
 
 })
