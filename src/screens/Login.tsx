@@ -9,8 +9,10 @@ import { Button, Dialog, Portal } from 'react-native-paper';
 import { passwordRules, emailRules } from '../rules/login';
 import { styles } from '../styles/login'
 import { routes } from '../routes/routes';
-import { postToBackend } from '../services/service';
-import { asyncStore } from '../services/service';
+
+import { postToBackend } from '../services/ApiService';
+import { asyncStore } from '../services/ApiService';
+
 import Popup from '../components/Popup';
 
 

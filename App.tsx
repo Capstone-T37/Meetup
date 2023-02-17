@@ -8,7 +8,7 @@ import Login from './src/screens/Login';
 import { MD3LightTheme as DefaultTheme, Provider as PaperProvider } from 'react-native-paper';
 import { NavigationContainer } from '@react-navigation/native';
 import Onboarding from './src/screens/Onboarding';
-import SignUp from './src/screens/Signup';
+import SignUp from './src/screens/SignUp';
 
 const theme = {
   ...DefaultTheme,

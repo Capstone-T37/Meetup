@@ -1,6 +1,10 @@
-import { View, Text , Image, KeyboardAvoidingView} from 'react-native'
+
+import { View, Text , Image} from 'react-native'
 import React from 'react'
-import { styles } from '../styles/signup';
+import { styles } from '../styles/signUp';
+
+
+
 import { Button } from 'react-native-paper';
 import AntDesign from 'react-native-vector-icons/AntDesign'
 import Ionicons from 'react-native-vector-icons/Ionicons'
@@ -8,8 +12,10 @@ import { Controller, useForm } from 'react-hook-form';
 import CInput from '../components/CInput';
 import {emailRules, passwordRules, confirmPwdRules} from '../rules/signUp'
 import { routes } from '../routes/routes';
-import { postToBackend } from '../services/service';
-import { asyncStore } from '../services/service';
+
+import { postToBackend } from '../services/ApiService';
+import { asyncStore } from '../services/ApiService';
+
 import Popup from '../components/Popup';
 export interface Props {
     navigation: any;
@@ -40,7 +46,9 @@ const SignUp: React.FC<Props> = (props: Props) => {
                 case 200: { 
                     let val = await res.json()
                     await asyncStore(val.token)
+
                     props.navigation.push("onboarding")
+
                     break; 
                 } 
                 default: {  
@@ -158,4 +166,6 @@ const SignUp: React.FC<Props> = (props: Props) => {
     )
 }
 
+
 export default SignUp
+

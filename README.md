@@ -38,4 +38,10 @@ $ npx react-native start
 ```java
 $ npx react-native run-ios
 ```
+
+before running it on android the following command:
+
+```
+adb -s emulator-5554 reverse tcp:4000 tcp:4000
+```
  

@@ -22,8 +22,10 @@ export const styles = StyleSheet.create({
         alignSelf:'center'
     },
     bottomView: {
+
         position: 'absolute',
         bottom: -50,
+
         flexDirection: 'row',
         flexWrap: 'wrap',
         alignSelf:'center'
