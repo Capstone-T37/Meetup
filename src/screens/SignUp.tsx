@@ -1,8 +1,7 @@
-
 import { View, Text , Image, KeyboardAvoidingView} from 'react-native'
 import React from 'react'
-import { styles } from '../styles/signUp';
-import { Button, TextInput } from 'react-native-paper';
+import { styles } from '../styles/signup';
+import { Button } from 'react-native-paper';
 import AntDesign from 'react-native-vector-icons/AntDesign'
 import Ionicons from 'react-native-vector-icons/Ionicons'
 import { Controller, useForm } from 'react-hook-form';
@@ -19,34 +18,40 @@ export interface Props {
 const SignUp: React.FC<Props> = (props: Props) => {
     const { handleSubmit, control } = useForm({
         defaultValues: {
-          phonenum: ''
+          name: '',
+          surname: '',
+          username: '',
+          email: '',
+          password: '',
+          confirmPassword: '',
+          promocode: '',
+          submitButton:''
         }
       });
 
       const signUpWIthCredentials = async (data: any) => {
-        // const domain : string = `${routes.localhost}${routes.signup}`
-        // data = {email: data.email, password: data.password}
-        // postToBackend(data, domain).then( async (res)=>{
-        //     switch(res?.status) { 
-        //         case 401: { 
-        //             return <Popup content="Sign up was unseccussfull"></Popup>
-        //         } 
-        //         case 200: { 
-        //             let val = await res.json()
-        //             await asyncStore(val.token)
-        //             props.navigation.push("Session")
-        //             break; 
-        //         } 
-        //         default: {  
-        //             break; 
-        //         } 
-        //      } 
-        // }).catch((e)=>console.log(e))
-        props.navigation.push("Verification")
+        const domain : string = `${routes.localhost}${routes.signup}`
+        data = {email: data.email, password: data.password}
+        postToBackend(data, domain).then( async (res)=>{
+            switch(res?.status) { 
+                case 401: { 
+                    return <Popup content="Sign up was unseccussfull"></Popup>
+                } 
+                case 200: { 
+                    let val = await res.json()
+                    await asyncStore(val.token)
+                    props.navigation.push("onboarding")
+                    break; 
+                } 
+                default: {  
+                    break; 
+                } 
+             } 
+        }).catch((e)=>console.log(e))
       }
 
     return (
-        <KeyboardAvoidingView behavior="padding" >
+       
             <View style = {styles.body}>
                 <View style = {styles.container}>
                     <Button  
@@ -62,32 +67,68 @@ const SignUp: React.FC<Props> = (props: Props) => {
                         <Text style={styles.txt}> Meetup </Text>
                 </View>
                 <View style={styles.form}>
-                    <Text style={styles.txt1}> Phone number: </Text>
-                    <View  style={{flexDirection: 'row', flexWrap: 'nowrap',width: '100%'}}>
                     <CInput
                         control = {control}
-                        style={{}}
-                        rules = {{}}
-                        placeholder= "CA +1"
-                        label = ""
-                        editable = {false}
-                        name = "CA"
-                        secureTextEntry = {false}
-                    />
-                        
-                        <CInput
-                        control = {control}
-                        style={{marginBottom:'20%', width: 270}}
-                        editable = {true}
+                        style={{marginBottom: 12}}
                         rules = {{required: 'your first name is required'}}
-                        placeholder= "Please enter your phone number"
-                        label = "phonenum"
-                        name = "phonenum"
+                        label="First name"
+                        placeholder="Your name..."
+                        name = "name"
                         secureTextEntry = {false}
                     />
-                    
-                </View>
-                    <Text style={styles.txt2}> We will send a text with a verification code. Message and data rates may apply. Learn what happens when your number changes. </Text>
+                    <CInput
+                        control = {control}
+                        style={{marginBottom: 12}}
+                        rules = {{required: 'your last name is required'}}
+                        label="Last name"
+                        placeholder="Your surname"
+                        name = "surname"
+                        secureTextEntry = {false}
+                    />
+                    <CInput
+                        control = {control}
+                        style={{marginBottom: 12}}
+                        rules = {{required: 'your username is required'}}
+                        label="username"
+                        placeholder="Type your username..."
+                        name = "username"
+                        secureTextEntry = {false}
+                    />
+                    <CInput
+                        control = {control}
+                        style={{marginBottom: 12}}
+                        rules = {emailRules}
+                        label="email"
+                        placeholder="you@example.com"
+                        name = "email"
+                        secureTextEntry = {false}
+                    />
+                    <CInput
+                        control = {control}
+                        style={{marginBottom: 12}}
+                        rules = {passwordRules}
+                        label="password"
+                        placeholder="Min. 8 characters"
+                        name = "password"
+                        secureTextEntry = {true}
+                    />
+                    <CInput
+                        control={control}
+                        style={{ marginBottom: 12 }}
+                        rules={confirmPwdRules}
+                        label="confirm password"
+                        placeholder="Min. 8 characters"
+                        name="confirmPassword"
+                        secureTextEntry={true} />
+                    <CInput
+                        control = {control}
+                        style={{marginBottom: 12}}
+                        rules = {{required: false}}
+                        label="promo code"
+                        placeholder="Enter promo code"
+                        name = "promocode"
+                        secureTextEntry = {false}
+                    />
                     <Controller
                         control = {control}
                         name = "submitButton"
@@ -100,8 +141,9 @@ const SignUp: React.FC<Props> = (props: Props) => {
                                     </Button>
                         }}
                     />
-                    </View>
-                    <View style={styles.bottomView}>
+                    
+                </View>
+                <View style={styles.bottomView}>
                         <Text style={styles.txt3}> Already have an account? </Text>
                         <Button  
                             style={{borderRadius: 8, width: 110, padding: 0}}  
@@ -111,10 +153,8 @@ const SignUp: React.FC<Props> = (props: Props) => {
                             Sign In
                         </Button>
                     </View>
-                
-                
             </View>
-        </KeyboardAvoidingView>
+        
     )
 }
 

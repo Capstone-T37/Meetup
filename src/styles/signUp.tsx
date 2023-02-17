@@ -3,17 +3,7 @@ import { StyleSheet } from "react-native";
 export const styles = StyleSheet.create({
     body: {
         marginTop: 60,
-        
     }, 
-    txt1: {
-        fontSize: 27,
-        fontWeight: 'bold'
-    },
-    txt2: {
-        fontSize: 13,
-        color: 'grey',
-        marginBottom: 40
-    },
     stretch: {
         width: 40,
         height: 40,       
@@ -21,7 +11,7 @@ export const styles = StyleSheet.create({
     container: {
         flexDirection: 'row',
         flexWrap: 'wrap',
-        marginBottom: '15%'
+        marginBottom: 12
     } ,
     txt: {
         fontSize: 25,
@@ -29,21 +19,14 @@ export const styles = StyleSheet.create({
         fontWeight: 'bold'
     },
     form: {
-        alignSelf:'center',
-        marginLeft: '15%',
-        marginRight: '15%',
-        
-        
-        
+        alignSelf:'center'
     },
     bottomView: {
+        position: 'absolute',
+        bottom: -50,
         flexDirection: 'row',
         flexWrap: 'wrap',
-        alignSelf:'center',
-        alignItems:'flex-start',
-         marginTop: '60%',
-        
-        
+        alignSelf:'center'
     },
     txt3: {
         fontSize: 17,

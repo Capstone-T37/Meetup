@@ -11,10 +11,9 @@ export interface Props {
     secureTextEntry: any;
     rules: any;
     style: any;
-    editable: boolean;
 }
 
-const CInput: React.FC<Props> = ({control, name, editable = true , label, style, rules = {}, placeholder, secureTextEntry}) => {
+const CInput: React.FC<Props> = ({control, name, label, style, rules = {}, placeholder, secureTextEntry}) => {
    
     return (
         <View>
@@ -28,7 +27,6 @@ const CInput: React.FC<Props> = ({control, name, editable = true , label, style,
                                     label={label}
                                     style = {{marginBottom: 5, backgroundColor: 'none'}}
                                     onBlur = {onBlur}
-                                    editable = {editable}
                                     onChangeText= {onChange}
                                     autoCorrect = {false}
                                     placeholder={placeholder}
