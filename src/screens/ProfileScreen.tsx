@@ -4,23 +4,16 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 import Feather from 'react-native-vector-icons/Feather';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import { Button, Menu, Divider, Provider } from 'react-native-paper';
-import { Button, Menu, Divider, Provider } from 'react-native-paper';
 
 
-type Props = {
-    navigation: any;
-}
+
+
 type Props = {
     navigation: any;
 }
 
 const ProfileScreen = (props: Props) => {
 
-  const [visible, setVisible] = React.useState(false);
-
-  const openMenu = () => setVisible(true);
-
-  const closeMenu = () => setVisible(false);
 
 
   const [visible, setVisible] = React.useState(false);
