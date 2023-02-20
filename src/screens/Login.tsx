@@ -9,8 +9,10 @@ import { Button, Dialog, Portal } from 'react-native-paper';
 import { passwordRules, emailRules } from '../rules/login';
 import { styles } from '../styles/login'
 import { routes } from '../routes/routes';
+
 import { postToBackend } from '../services/ApiService';
 import { asyncStore } from '../services/ApiService';
+
 import Popup from '../components/Popup';
 
 
@@ -82,6 +84,7 @@ const Login : React.FC<Props> = (props: Props) => {
                     placeholder= "Please enter your password..."
                     label = "password"
                     name = "password"
+
                     secureTextEntry = {true}
                 />
 

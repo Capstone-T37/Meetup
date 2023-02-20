@@ -1,7 +1,10 @@
 
-import { View, Text , Image, KeyboardAvoidingView} from 'react-native'
+import { View, Text , Image} from 'react-native'
 import React from 'react'
 import { styles } from '../styles/signUp';
+
+
+
 import { Button } from 'react-native-paper';
 import AntDesign from 'react-native-vector-icons/AntDesign'
 import Ionicons from 'react-native-vector-icons/Ionicons'
@@ -9,8 +12,10 @@ import { Controller, useForm } from 'react-hook-form';
 import CInput from '../components/CInput';
 import {emailRules, passwordRules, confirmPwdRules} from '../rules/signUp'
 import { routes } from '../routes/routes';
+
 import { postToBackend } from '../services/ApiService';
 import { asyncStore } from '../services/ApiService';
+
 import Popup from '../components/Popup';
 export interface Props {
     navigation: any;
@@ -41,7 +46,9 @@ const SignUp: React.FC<Props> = (props: Props) => {
                 case 200: { 
                     let val = await res.json()
                     await asyncStore(val.token)
-                    props.navigation.push("Session")
+
+                    props.navigation.push("onboarding")
+
                     break; 
                 } 
                 default: {  
@@ -52,7 +59,7 @@ const SignUp: React.FC<Props> = (props: Props) => {
       }
 
     return (
-        <KeyboardAvoidingView behavior="padding" >
+       
             <View style = {styles.body}>
                 <View style = {styles.container}>
                     <Button  
@@ -114,14 +121,13 @@ const SignUp: React.FC<Props> = (props: Props) => {
                         secureTextEntry = {true}
                     />
                     <CInput
-                        control = {control}
-                        style={{marginBottom: 12}}
-                        rules = {confirmPwdRules}
+                        control={control}
+                        style={{ marginBottom: 12 }}
+                        rules={confirmPwdRules}
                         label="confirm password"
                         placeholder="Min. 8 characters"
-                        name = "confirmPassword"
-                        secureTextEntry = {true}
-                    />
+                        name="confirmPassword"
+                        secureTextEntry={true} />
                     <CInput
                         control = {control}
                         style={{marginBottom: 12}}
@@ -143,7 +149,9 @@ const SignUp: React.FC<Props> = (props: Props) => {
                                     </Button>
                         }}
                     />
-                    <View style={styles.bottomView}>
+                    
+                </View>
+                <View style={styles.bottomView}>
                         <Text style={styles.txt3}> Already have an account? </Text>
                         <Button  
                             style={{borderRadius: 8, width: 110, padding: 0}}  
@@ -153,11 +161,11 @@ const SignUp: React.FC<Props> = (props: Props) => {
                             Sign In
                         </Button>
                     </View>
-                </View>
-                
             </View>
-        </KeyboardAvoidingView>
+        
     )
 }
 
+
 export default SignUp
+
