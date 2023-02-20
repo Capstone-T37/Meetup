@@ -20,13 +20,13 @@ const Home = (rops: Props) => {
         (() => checkForPermission().then((res) => dispatch(setPermission(res))))();
     }, [])
     return (
-        <SafeAreaView style={styles.container}>
+        <View style={styles.container}>
             {
                 permitted ? <MapComponent /> : <PermissionAsk />
             }
 
 
-        </SafeAreaView>
+        </View>
     )
 }
 
