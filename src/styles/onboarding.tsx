@@ -6,6 +6,8 @@ export const styles = StyleSheet.create({
       alignItems: 'center',
       justifyContent: 'center',
       padding: 10,
+      backgroundColor: 'rgb(39, 38, 39)',
+      height: '100%',
     },
     stretch: {
         width: 50,
@@ -15,7 +17,8 @@ export const styles = StyleSheet.create({
     txt: {
         fontSize: 30,
         paddingTop: 5,
-        fontWeight: 'bold'
+        fontWeight: 'bold',
+        color: 'white'
     },
     ct: {
         position: 'absolute',

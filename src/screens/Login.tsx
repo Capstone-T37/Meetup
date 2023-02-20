@@ -52,9 +52,7 @@ const Login : React.FC<Props> = (props: Props) => {
     }
 
     return (
-        <KeyboardAvoidingView behavior="padding" >
             <View style = {styles.body}>
-                
                 <View style = {styles.container}>
                         <Image
                             style = {styles.stretch}
@@ -66,7 +64,6 @@ const Login : React.FC<Props> = (props: Props) => {
                         <Text style={styles.txt1}> Welcome back, </Text>
                         <Text style={styles.txt2}> Sign in to continue </Text>
                 </View>
-
                 <CInput
                     control = {control}
                     style={{marginBottom: 30}}
@@ -76,7 +73,6 @@ const Login : React.FC<Props> = (props: Props) => {
                     name = "email"
                     secureTextEntry = {false}
                 />
-
                 <CInput
                     control = {control}
                     style={{marginBottom: 30}}
@@ -87,7 +83,6 @@ const Login : React.FC<Props> = (props: Props) => {
 
                     secureTextEntry = {true}
                 />
-
                 <CButton 
                     content="Sign In"
                     control={control}
@@ -96,7 +91,7 @@ const Login : React.FC<Props> = (props: Props) => {
                     mode="contained" 
                     onPress={handleSubmit(signInWIthCredentials)}/>
                 <View style={styles.bottomView}>
-                    <Text style={styles.txt3}> Don't have an account? </Text>
+                    <Text style={[styles.txt3, {color: 'white'}]}> Don't have an account? </Text>
                     <Button 
                         style={{borderRadius: 8, width: 110, padding: 0}}  
                         labelStyle={{fontSize: 12}} 
@@ -106,9 +101,8 @@ const Login : React.FC<Props> = (props: Props) => {
                         Sign Up
                     </Button>
                 </View>
-                
             </View>
-        </KeyboardAvoidingView>
+        
     )
 }
 

@@ -145,7 +145,10 @@ const SignUp: React.FC<Props> = (props: Props) => {
                                         style={{borderRadius: 70, marginBottom: 75, width: 70, height: 40, marginLeft: '75%'}}
                                         mode= "contained"
                                         onPress={handleSubmit(signUpWIthCredentials)}>  
-                                        <AntDesign name='arrowright' size={25}/>
+                                        <AntDesign 
+                                        color= 'black'
+                                        name='arrowright' 
+                                        size={25}/>
                                     </Button>
                         }}
                     />

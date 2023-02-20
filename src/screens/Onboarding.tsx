@@ -1,6 +1,6 @@
 
 import { View, Text , Image} from 'react-native'
-import React from 'react'
+import React, { useRef } from 'react'
 import { Button } from 'react-native-paper';
 import Carousel from '../components/Carousel'
 import { styles } from '../styles/onboarding';
@@ -10,6 +10,12 @@ export interface Props {
 }
 
 const Onboarding: React.FC<Props> = (props: Props) => {
+    
+    const onb = useRef<any>(null);
+
+    const navg = () => {
+        props.navigation.push('Session')
+    }
     return (
         <View style={styles.container}>
             <View style = {styles.ct}>
@@ -20,6 +26,7 @@ const Onboarding: React.FC<Props> = (props: Props) => {
                         <Text style={styles.txt}> Meetup </Text>
             </View>
             <Carousel
+                callback = {navg}
                 items={[{
                 title: 'Explore a variety of events and activities around your city',
                 }, {
@@ -28,14 +35,10 @@ const Onboarding: React.FC<Props> = (props: Props) => {
                 title: 'Find your bestfriend and the perfect event for a hangout',
                 }, ]}
             />
-            <Button 
-                style={{borderRadius: 8, width: 350, marginBottom: 7}}
-                mode="contained" 
-                onPress={() => props.navigation.push("Session")}
-                > Get started</Button>
+            
             <View style = {styles.prvc}>
-                <Text >
-                    By continuing you agree to Meetup's <Text style={{color: '#FC6600'}}>Terms of Service</Text> and <Text style={{color: '#FC6600'}}>Privacy Policy</Text>
+                <Text style={{color: 'white'}}>
+                    By continuing you agree to Meetup's <Text style={{textDecorationLine: 'underline'}}>Terms of Service</Text> and <Text style={{textDecorationLine: 'underline'}}>Privacy Policy</Text>
                 </Text>
             </View>
         </View>

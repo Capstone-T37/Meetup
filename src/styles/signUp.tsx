@@ -2,7 +2,9 @@ import { StyleSheet } from "react-native";
 
 export const styles = StyleSheet.create({
     body: {
-        marginTop: 60,
+        paddingTop: 60,
+        backgroundColor: 'rgb(39, 38, 39)',
+        height: '100%',
     }, 
     stretch: {
         width: 40,
@@ -16,15 +18,16 @@ export const styles = StyleSheet.create({
     txt: {
         fontSize: 25,
         paddingTop: 5,
-        fontWeight: 'bold'
+        fontWeight: 'bold',
+        color: 'white'
     },
     form: {
         alignSelf:'center'
     },
     bottomView: {
 
-        position: 'absolute',
-        bottom: -50,
+        // position: 'absolute',
+        // bottom: -50,
 
         flexDirection: 'row',
         flexWrap: 'wrap',
@@ -32,8 +35,8 @@ export const styles = StyleSheet.create({
     },
     txt3: {
         fontSize: 17,
-        color: 'grey',
-        paddingTop:10
+        paddingTop:10,
+        color: 'white'
     },
 
 })
