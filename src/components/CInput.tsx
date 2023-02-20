@@ -26,7 +26,7 @@ const CInput: React.FC<Props> = ({control, name, label, style, rules = {}, place
                     return <View style={style}>
                                 <TextInput 
                                     label={label}
-                                    style = {{marginBottom: 5, backgroundColor: 'none'}}
+                                    style = {{marginBottom: 5, backgroundColor: 'none', backgroundColor: 'none'}}
                                     textColor= 'white'
                                     onBlur = {onBlur}
                                     onChangeText= {onChange}
