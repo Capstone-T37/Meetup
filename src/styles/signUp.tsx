@@ -26,8 +26,6 @@ export const styles = StyleSheet.create({
     },
     bottomView: {
 
-        // position: 'absolute',
-        // bottom: -50,
 
         flexDirection: 'row',
         flexWrap: 'wrap',

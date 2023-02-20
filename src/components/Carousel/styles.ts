@@ -9,20 +9,24 @@ export const styles = StyleSheet.create({
     marginBottom: 20,
     width: '100%',
     paddingTop: 90,
+
     height: '80%',
     backgroundColor: 'transparent',
+
     marginTop: 10,
     shadowOffset: {
       width: 0,
       height: 5
     },
   },
+
   bgct: {
     flex: 0.7,
     alignItems: 'center',
     justifyContent: 'center',
     backgroundColor: 'rgb(39, 38, 39)',
   },
+
   scrollView: {
     display: 'flex',
     flexDirection: 'row',
@@ -44,7 +48,9 @@ export const styles = StyleSheet.create({
   bullet: {
     paddingHorizontal: 3,
     fontSize: 30,
+
     color: 'white'
+
   }
 });
 
