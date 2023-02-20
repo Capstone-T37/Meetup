@@ -22,7 +22,9 @@ const ProfileScreen = (props: Props) => {
     <SafeAreaView style={styles.container}>
             <ScrollView showsVerticalScrollIndicator={false}>
                 <View style={styles.titleBar}>
+
                     <Ionicons name="ios-arrow-back" color="white" size={24} onPress={() => props.navigation.goBack()} ></Ionicons>
+
                     <Provider>
                     <View
                             style={{
@@ -34,7 +36,9 @@ const ProfileScreen = (props: Props) => {
                             style ={{padding: 0}}
                             visible={visible}
                             onDismiss={closeMenu}
+
                             anchor={<Feather name="more-vertical" onPress={openMenu} size={24} color="white"></Feather>}>
+
                             <Menu.Item onPress={() => props.navigation.push("Login")} title="Log out" />
                             </Menu>
                     </View>

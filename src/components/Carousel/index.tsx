@@ -1,3 +1,4 @@
+
 import React, { useRef } from 'react'
 import { View, ScrollView, Text, Dimensions } from 'react-native'
 import { Stat } from './Stat';
@@ -8,6 +9,7 @@ import { Button } from 'react-native-paper';
 export const Carousel = (props: any) => {
 
   const { items, style, callback } = props;
+
   const itemsPerInterval = props.itemsPerInterval === undefined
     ? 1
     : props.itemsPerInterval;
@@ -15,9 +17,11 @@ export const Carousel = (props: any) => {
   const [interval, setInterval] = React.useState(1);
   const [intervals, setIntervals] = React.useState(1);
   const [width, setWidth] = React.useState(0);
+
   const scrollViewRef = useRef<any>(null);
 
   const windowWidth = Dimensions.get('window').width - 20;
+
 
   const init = (width: number) => {
     // initialise width
@@ -29,7 +33,7 @@ export const Carousel = (props: any) => {
 
   const getInterval = (offset: any) => {
     for (let i = 1; i <= intervals; i++) {
-      
+
       if (offset+1 < (width / intervals) * i) {
         return i;
       }
@@ -44,6 +48,7 @@ export const Carousel = (props: any) => {
  };
 
   let btContent = interval === items.length ? 'Get started' : 'continue'
+
 
   let bullets = [];
   for (let i = 1; i <= intervals; i++) {
@@ -61,6 +66,7 @@ export const Carousel = (props: any) => {
   }
 
   return (
+
         <View style={styles.bgct}>
           <View style={styles.container}>
             <ScrollView
@@ -97,6 +103,36 @@ export const Carousel = (props: any) => {
             onPress={interval === items.length ? callback : toNextPage}
             > {btContent}</Button>
         </View>
+    <View style={styles.container}>
+      <ScrollView
+        horizontal={true}
+        contentContainerStyle={{ ...styles.scrollView, width: `${100 * intervals}%` }}
+        showsHorizontalScrollIndicator={false}
+        onContentSizeChange={(w, h) => init(w)}
+        onScroll={data => {
+          setWidth(data.nativeEvent.contentSize.width);
+          setInterval(getInterval(data.nativeEvent.contentOffset.x));
+        }}
+        scrollEventThrottle={200}
+        pagingEnabled
+        decelerationRate="fast"
+      >
+        {items.map((item: any, index: number) => {
+
+              return (
+                <Slide
+                  key={index}
+                  title={item.title}
+                />
+              );
+          
+        })}
+      </ScrollView>
+      <View style={styles.bullets}>
+        {bullets}
+      </View>
+    </View>
+
   )
 }
 

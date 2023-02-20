@@ -2,6 +2,7 @@ import { StyleSheet } from 'react-native'
 
 export const styles = StyleSheet.create({
   slide: {
+
     paddingHorizontal: 20,
     paddingBottom: 10,
     paddingTop: 30,
@@ -19,7 +20,9 @@ export const styles = StyleSheet.create({
   slideText: {
     fontWeight: 'bold',
     fontSize: 23,
+
     color: 'white'
+
   },
 });
 
