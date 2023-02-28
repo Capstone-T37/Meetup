@@ -10,103 +10,100 @@ import { passwordRules, emailRules } from '../rules/login';
 import { styles } from '../styles/login'
 import { routes } from '../routes/routes';
 
-import { postToBackend } from '../services/ApiService';
+import { asyncStoreMulti, getRequest, postRequest } from '../services/ApiService';
 import { asyncStore } from '../services/ApiService';
 
 import Popup from '../components/Popup';
-
+import axios from 'axios';
+import { useDispatch } from 'react-redux'
+import { setId } from '../redux/slices/userIdSlice';
 
 export interface Props {
     navigation: any;
 }
 
-const Login : React.FC<Props> = (props: Props) => {
+const Login: React.FC<Props> = (props: Props) => {
+    const dispatch = useDispatch()
 
     const { handleSubmit, control } = useForm({
         defaultValues: {
-          email: '',
-          password: ''
+            email: '',
+            password: ''
         }
-      });
+    });
 
 
-      const signInWIthCredentials = async (data: any) => {
-        const domain : string = `${routes.localhost}${routes.login}`
-        data = {email: data.email, password: data.password}
-        postToBackend(data, domain).then( async (res)=>{
-            switch(res?.status) { 
-                case 401: { 
-                    return <Popup content="Login was unseccussfull"></Popup>
-                } 
-                case 200: { 
-                    let val = await res.json()
-                    await asyncStore(val.token)
-                    props.navigation.push("Session")
-                    break; 
-                } 
-                default: {  
-                    break; 
-                } 
-             } 
-        }).catch((e)=>console.log(e))
+    const signInWIthCredentials = async (data: any) => {
+        const authDomain = `${routes.authHost}${routes.login}`
+        const authData = { email: data.email, password: data.password }
+        const userDomain = `${routes.userHost}${routes.user}/${data.email}`
+
+        postRequest(authDomain, authData).then((authResponse) => {
+            getRequest(userDomain).then((userResponse) => {
+                asyncStoreMulti([["token", authResponse?.data?.token], ["id", userResponse?.data?._id]])
+                dispatch(setId(userResponse?.data?._id))
+            }
+
+            )
+        }).then(() => props.navigation.push("onboarding")).catch((e) => console.log(e))
     }
 
     return (
         <KeyboardAvoidingView behavior="padding" >
-            <View style = {styles.body}>
-                
-                <View style = {styles.container}>
-                        <Image
-                            style = {styles.stretch}
-                            source={require('../assets/meetup.png')}
-                        />
-                        <Text style={styles.txt}> Meetup </Text>
-                    </View>
-                    <View style={{marginBottom: 60}}>
-                        <Text style={styles.txt1}> Welcome back, </Text>
-                        <Text style={styles.txt2}> Sign in to continue </Text>
+            <View style={styles.body}>
+
+                <View style={styles.container}>
+                    <Image
+                        style={styles.stretch}
+                        source={require('../assets/meetup.png')}
+                    />
+                    <Text style={styles.txt}> Meetup </Text>
+                </View>
+                <View style={{ marginBottom: 60 }}>
+                    <Text style={styles.txt1}> Welcome back, </Text>
+                    <Text style={styles.txt2}> Sign in to continue </Text>
                 </View>
 
                 <CInput
-                    control = {control}
-                    style={{marginBottom: 30}}
-                    rules = {emailRules}
-                    placeholder= "Please enter your email..."
-                    label = "email"
-                    name = "email"
-                    secureTextEntry = {false}
+                    control={control}
+                    style={{ marginBottom: 30 }}
+                    rules={emailRules}
+                    placeholder="Please enter your email..."
+                    label="email"
+                    name="email"
+                    secureTextEntry={false}
                 />
 
                 <CInput
-                    control = {control}
-                    style={{marginBottom: 30}}
-                    rules = {passwordRules}
-                    placeholder= "Please enter your password..."
-                    label = "password"
-                    name = "password"
+                    control={control}
+                    style={{ marginBottom: 30 }}
+                    rules={passwordRules}
+                    placeholder="Please enter your password..."
+                    label="password"
+                    name="password"
 
-                    secureTextEntry = {true}
+                    secureTextEntry={true}
                 />
 
-                <CButton 
+                <CButton
                     content="Sign In"
                     control={control}
-                    style= {{borderRadius: 8, marginBottom: 180}}
+                    style={{ borderRadius: 8, marginBottom: 180 }}
                     name="button"
-                    mode="contained" 
-                    onPress={handleSubmit(signInWIthCredentials)}/>
+                    mode="contained"
+                    onPress={handleSubmit(signInWIthCredentials)} />
                 <View style={styles.bottomView}>
                     <Text style={styles.txt3}> Don't have an account? </Text>
-                    <Button 
-                        style={{borderRadius: 8, width: 110, padding: 0}}  
-                        labelStyle={{fontSize: 12}} 
+                    <Button
+                        style={{ borderRadius: 8, width: 110, padding: 0 }}
+                        labelStyle={{ fontSize: 12 }}
                         mode="outlined"
                         onPress={() => props.navigation.push("SignUp")}
-                        >
+                    >
                         Sign Up
                     </Button>
                 </View>
-                
+
             </View>
         </KeyboardAvoidingView>
     )
