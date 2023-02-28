@@ -27,7 +27,7 @@ const PermissionAsk = (props: Props) => {
                             <View style={{ backgroundColor: "#007aff", alignSelf: 'baseline', padding: 5, borderRadius: 4 }}>
                                 <FontAwesome5 name="location-arrow" size={10} color="white" />
                             </View>
-                            <Text> Location</Text>
+                            <Text style={{color: 'white'}}> Location</Text>
                         </View>
                         <SimpleLineIcons name='arrow-right' color="grey" size={10} />
                     </View>
@@ -37,7 +37,7 @@ const PermissionAsk = (props: Props) => {
                         <Text style={styles.description}>2. Then tap on</Text><Text style={styles.important}> When in use</Text>
                     </View>
                     <View style={styles.setting}>
-                        <Text>When in use</Text>
+                        <Text style={{color: 'white'}}>When in use</Text>
                         <Feather name='check' color='green' size={15} />
 
                     </View>
@@ -54,6 +54,7 @@ export default PermissionAsk
 
 const styles = StyleSheet.create({
     container: {
+        backgroundColor: 'rgb(39, 38, 39)',
         height: '100%',
         width: '100%',
     },
@@ -63,7 +64,8 @@ const styles = StyleSheet.create({
     },
     title: {
         fontSize: 20,
-        fontWeight: 'bold'
+        fontWeight: 'bold',
+        color:'white'
 
     },
     descriptionContainer: {
@@ -73,6 +75,7 @@ const styles = StyleSheet.create({
     description: {
         textAlign: 'center',
         fontSize: 15,
+        color: 'white'
     },
     instructionsContainer: {
         justifyContent: 'space-evenly',
@@ -102,6 +105,7 @@ const styles = StyleSheet.create({
     important: {
         fontWeight: 'bold',
         fontSize: 15,
+        color: 'white'
     },
     button: { position: 'absolute', bottom: 10, justifyContent: 'center', width: '100%', paddingLeft: 20, paddingRight: 20 }
 
