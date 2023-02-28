@@ -67,44 +67,10 @@ export const Carousel = (props: any) => {
 
   return (
 
-        <View style={styles.bgct}>
-          <View style={styles.container}>
-            <ScrollView
-              ref={scrollViewRef}
-              horizontal={true}
-              contentContainerStyle={{ ...styles.scrollView, width: `${100 * intervals}%` }}
-              showsHorizontalScrollIndicator={false}
-              onContentSizeChange={(w, h) => init(w)}
-              onScroll={data => {
-                setWidth(data.nativeEvent.contentSize.width);
-                setInterval(getInterval(data.nativeEvent.contentOffset.x));
-              }}
-              scrollEventThrottle={200}
-              pagingEnabled
-              decelerationRate="fast"
-            >
-              {items.map((item: any, index: number) => {
-                    return (
-                      <Slide
-                        key={index}
-                        title={item.title}
-                      />
-                    );
-              })}
-            </ScrollView>
-            <View style={styles.bullets}>
-              {bullets}
-            </View>
-          </View>
-          <Button 
-            style={{borderRadius: 8, width: 350, marginBottom: 7}}
-            mode="contained" 
-            textColor='black'
-            onPress={interval === items.length ? callback : toNextPage}
-            > {btContent}</Button>
-        </View>
+    <View style={styles.bgct}>
     <View style={styles.container}>
       <ScrollView
+        ref={scrollViewRef}
         horizontal={true}
         contentContainerStyle={{ ...styles.scrollView, width: `${100 * intervals}%` }}
         showsHorizontalScrollIndicator={false}
@@ -118,20 +84,27 @@ export const Carousel = (props: any) => {
         decelerationRate="fast"
       >
         {items.map((item: any, index: number) => {
-
               return (
                 <Slide
                   key={index}
                   title={item.title}
                 />
               );
-          
         })}
       </ScrollView>
       <View style={styles.bullets}>
         {bullets}
       </View>
     </View>
+    <Button 
+      style={{borderRadius: 8, width: 350, marginBottom: 7}}
+      mode="contained" 
+      textColor='black'
+      onPress={interval === items.length ? callback : toNextPage}
+      > {btContent}</Button>
+  </View>
+
+
 
   )
 }
