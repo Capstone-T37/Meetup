@@ -1,5 +1,5 @@
 
-import { View, Text , Image} from 'react-native'
+import { View, Text, Image } from 'react-native'
 import React from 'react'
 import { styles } from '../styles/signUp';
 
@@ -10,53 +10,51 @@ import AntDesign from 'react-native-vector-icons/AntDesign'
 import Ionicons from 'react-native-vector-icons/Ionicons'
 import { Controller, useForm } from 'react-hook-form';
 import CInput from '../components/CInput';
-import {emailRules, passwordRules, confirmPwdRules} from '../rules/signUp'
+import { emailRules, passwordRules, confirmPwdRules } from '../rules/signUp'
 import { routes } from '../routes/routes';
 
-import { postToBackend } from '../services/ApiService';
+import { asyncStoreMulti, postRequest } from '../services/ApiService';
 import { asyncStore } from '../services/ApiService';
 
 import Popup from '../components/Popup';
+import axios from 'axios';
+import { useDispatch } from 'react-redux'
+import { setId } from '../redux/slices/userIdSlice';
+
 export interface Props {
     navigation: any;
 }
 
 const SignUp: React.FC<Props> = (props: Props) => {
+    const dispatch = useDispatch()
+
     const { handleSubmit, control } = useForm({
         defaultValues: {
-          name: '',
-          surname: '',
-          username: '',
-          email: '',
-          password: '',
-          confirmPassword: '',
-          promocode: '',
-          submitButton:''
+            name: '',
+            surname: '',
+            username: '',
+            email: '',
+            password: '',
+            confirmPassword: '',
+            promocode: '',
+            submitButton: ''
         }
-      });
+    });
 
-      const signUpWIthCredentials = async (data: any) => {
-        const domain : string = `${routes.localhost}${routes.signup}`
-        data = {email: data.email, password: data.password}
-        postToBackend(data, domain).then( async (res)=>{
-            switch(res?.status) { 
-                case 401: { 
-                    return <Popup content="Sign up was unseccussfull"></Popup>
-                } 
-                case 200: { 
-                    let val = await res.json()
-                    await asyncStore(val.token)
+    const signUpWIthCredentials = async (data: any) => {
+        const authDomain = `${routes.authHost}${routes.signup}`
+        const authData = { email: data.email, password: data.password }
+        const userDomain = `${routes.userHost}${routes.user}`
+        const userData = { email: data.email, username: data.username, firstName: data.name, lastName: data.surname }
 
-                    props.navigation.push("onboarding")
+        postRequest(userDomain, userData).then((userResponse) => {
+            postRequest(authDomain, authData).then((authResponse) => {
+                asyncStoreMulti([["token", authResponse?.data?.token], ["id", userResponse?.data]]).then(() => props.navigation.push("onboarding"))
+                dispatch(setId(userResponse?.data))
+            })
+        }).catch((e) => console.log(e))
 
-                    break; 
-                } 
-                default: {  
-                    break; 
-                } 
-             } 
-        }).catch((e)=>console.log(e))
-      }
+    }
 
     return (
        

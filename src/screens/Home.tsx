@@ -9,6 +9,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { RootState } from '../redux/store'
 import { setPermission } from '../redux/slices/permissionSlice'
 import { check, PERMISSIONS } from 'react-native-permissions'
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 
 type Props = {}
@@ -18,6 +19,12 @@ const Home = (rops: Props) => {
     const permitted = useSelector((state: RootState) => state.permission.whenInUse)
     useEffect(() => {
         (() => checkForPermission().then((res) => dispatch(setPermission(res))))();
+        try {
+            (async () => await AsyncStorage.multiGet(["token", "id"]))().then((res) => console.log(res))
+
+        } catch (e) {
+            console.log(" could not be fetched!")
+        }
     }, [])
     return (
         <View style={styles.container}>
