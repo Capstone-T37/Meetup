@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View } from 'react-native'
+import { StyleSheet, Text, View, SafeAreaView } from 'react-native'
 import React, { useEffect } from 'react'
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import SimpleLineIcons from 'react-native-vector-icons/SimpleLineIcons';
@@ -9,7 +9,7 @@ type Props = {}
 
 const PermissionAsk = (props: Props) => {
     return (
-        <View style={styles.container}>
+        <SafeAreaView style={styles.container}>
             <View style={styles.titleContainer}>
                 <Text style={styles.title}>Set Location to 'When In Use'</Text>
             </View>
@@ -46,7 +46,7 @@ const PermissionAsk = (props: Props) => {
             <View style={styles.button}>
                 <Button mode='contained' buttonColor='purple' onPress={goToSettings}>Go to Settings</Button>
             </View>
-        </View>
+        </SafeAreaView>
     )
 }
 
@@ -103,6 +103,6 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
         fontSize: 15,
     },
-    button: { position: 'absolute', bottom: 0, justifyContent: 'center', width: '100%', paddingLeft: 20, paddingRight: 20 }
+    button: { position: 'absolute', bottom: 10, justifyContent: 'center', width: '100%', paddingLeft: 20, paddingRight: 20 }
 
 })

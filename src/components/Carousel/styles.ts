@@ -9,19 +9,24 @@ export const styles = StyleSheet.create({
     marginBottom: 20,
     width: '100%',
     paddingTop: 90,
-    height: '55%',
+
+    height: '80%',
     backgroundColor: 'transparent',
-    borderColor: '#ebebeb',
-    borderWidth: 1,
-    borderRadius: 8,
-    shadowColor: '#fcfcfc',
-    shadowOpacity: 1,
+
     marginTop: 10,
     shadowOffset: {
       width: 0,
       height: 5
     },
   },
+
+  bgct: {
+    flex: 0.7,
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: 'rgb(39, 38, 39)',
+  },
+
   scrollView: {
     display: 'flex',
     flexDirection: 'row',
@@ -38,10 +43,14 @@ export const styles = StyleSheet.create({
     flexDirection: 'row',
     paddingHorizontal: 10,
     paddingTop: 5,
+
   },
   bullet: {
     paddingHorizontal: 3,
     fontSize: 30,
+
+    color: 'white'
+
   }
 });
 

@@ -27,13 +27,13 @@ const Home = (rops: Props) => {
         }
     }, [])
     return (
-        <SafeAreaView style={styles.container}>
+        <View style={styles.container}>
             {
                 permitted ? <MapComponent /> : <PermissionAsk />
             }
 
 
-        </SafeAreaView>
+        </View>
     )
 }
 

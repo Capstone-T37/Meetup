@@ -14,8 +14,20 @@ const BottomNavBar = (props: Props) => {
 
     return (
             <Tab.Navigator screenOptions={{headerShown: false}}>
-                <Tab.Screen name="Home" component={Home} options={{ tabBarIcon: () => (<AntDesign name='home' size={23} />) }}  />
-                <Tab.Screen name="Profile" component={ProfileScreen} options={{ tabBarIcon: () => (<MaterialCommunityIcons name='account-circle-outline' size={23} />) }} />
+                <Tab.Screen 
+                    name="Home" 
+                    component={Home}  
+                    options={{ 
+                        tabBarLabelStyle: {color:'white'},
+                        tabBarStyle: {backgroundColor: 'rgb(39, 38, 39)'},
+                        tabBarIcon: () => (<AntDesign style={{color: 'white'}} name='home' size={23} />) }}  />
+                <Tab.Screen 
+                    name="Profile" 
+                    component={ProfileScreen} 
+                    options={{ 
+                        tabBarLabelStyle: {color:'white'}, 
+                        tabBarStyle: {backgroundColor: 'rgb(39, 38, 39)'}, 
+                        tabBarIcon: () => (<MaterialCommunityIcons style={{color: 'white'}} name='account-circle-outline' size={23} />) }} />
             </Tab.Navigator>
     )
 }

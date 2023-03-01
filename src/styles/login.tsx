@@ -2,9 +2,11 @@ import { StyleSheet } from "react-native";
 
 export const styles = StyleSheet.create({
     body: {
-        marginTop: 60,
-        marginLeft: 25,
-        marginRight: 25,
+        paddingTop: 60,
+        paddingLeft: 25,
+        paddingRight: 25,
+        height: '100%',
+        backgroundColor: 'rgb(39, 38, 39)'
     },
 
     stretch: {
@@ -15,7 +17,8 @@ export const styles = StyleSheet.create({
     txt: {
         fontSize: 30,
         paddingTop: 5,
-        fontWeight: 'bold'
+        fontWeight: 'bold',
+        color: 'white'
     },
     container: {
         flexDirection: 'row',
@@ -24,7 +27,8 @@ export const styles = StyleSheet.create({
     } ,
     txt1: {
         fontSize: 27,
-        fontWeight: 'bold'
+        fontWeight: 'bold',
+        color: 'white'
     }
     ,
     txt2: {
@@ -35,9 +39,10 @@ export const styles = StyleSheet.create({
     txt3: {
         fontSize: 17,
         color: 'grey',
-        paddingTop:10
+        paddingTop:10,
     },
     bottomView: {
+       
         flexDirection: 'row',
         flexWrap: 'wrap',
         alignSelf: 'center'

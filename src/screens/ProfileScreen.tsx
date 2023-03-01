@@ -6,11 +6,15 @@ import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import { Button, Menu, Divider, Provider } from 'react-native-paper';
 
 
+
+
 type Props = {
     navigation: any;
 }
 
 const ProfileScreen = (props: Props) => {
+
+
 
   const [visible, setVisible] = React.useState(false);
 
@@ -22,7 +26,9 @@ const ProfileScreen = (props: Props) => {
     <SafeAreaView style={styles.container}>
             <ScrollView showsVerticalScrollIndicator={false}>
                 <View style={styles.titleBar}>
-                    <Ionicons name="ios-arrow-back" size={24} onPress={() => props.navigation.goBack()} color="#52575D"></Ionicons>
+
+                    <Ionicons name="ios-arrow-back" color="white" size={24} onPress={() => props.navigation.goBack()} ></Ionicons>
+
                     <Provider>
                     <View
                             style={{
@@ -34,7 +40,9 @@ const ProfileScreen = (props: Props) => {
                             style ={{padding: 0}}
                             visible={visible}
                             onDismiss={closeMenu}
-                            anchor={<Feather name="more-vertical" onPress={openMenu} size={24} color="#52575D"></Feather>}>
+
+                            anchor={<Feather name="more-vertical" onPress={openMenu} size={24} color="white"></Feather>}>
+
                             <Menu.Item onPress={() => props.navigation.push("Login")} title="Log out" />
                             </Menu>
                     </View>
@@ -98,7 +106,7 @@ const ProfileScreen = (props: Props) => {
                     <View style={styles.recentItem}>
                         <View style={styles.activityIndicator}></View>
                         <View style={{ width: 250 }}>
-                            <Text style={[styles.text, { color: "#41444B", fontWeight: "300" }]}>
+                            <Text style={[styles.text, { color: "white", fontWeight: "300" }]}>
                                 Meetup with <Text style={{ fontWeight: "400" }}>Jake Challeahe</Text> 
                             </Text>
                         </View>
@@ -107,7 +115,7 @@ const ProfileScreen = (props: Props) => {
                     <View style={styles.recentItem}>
                         <View style={styles.activityIndicator}></View>
                         <View style={{ width: 250 }}>
-                            <Text style={[styles.text, { color: "#41444B", fontWeight: "300" }]}>
+                            <Text style={[styles.text, { color: "white", fontWeight: "300" }]}>
                                 Became friends with <Text style={{ fontWeight: "400" }}>Luke Harper</Text>
                             </Text>
                         </View>
@@ -122,12 +130,12 @@ export default ProfileScreen
 
 const styles = StyleSheet.create({
     container: {
+        backgroundColor: 'rgb(39, 38, 39)',
         flex: 1,
-        backgroundColor: "#FFF"
     },
     text: {
         fontFamily: "HelveticaNeue",
-        color: "#52575D"
+        color: "white",
     },
     image: {
         flex: 1,
@@ -227,7 +235,8 @@ const styles = StyleSheet.create({
         marginLeft: 78,
         marginTop: 32,
         marginBottom: 6,
-        fontSize: 10
+        fontSize: 10,
+        color: 'white'
     },
     recentItem: {
         flexDirection: "row",
@@ -242,5 +251,6 @@ const styles = StyleSheet.create({
         borderRadius: 6,
         marginTop: 3,
         marginRight: 20
-    }
+    },
+    
 })

@@ -49,21 +49,18 @@ const Login: React.FC<Props> = (props: Props) => {
     }
 
     return (
-        <KeyboardAvoidingView behavior="padding" >
-            <View style={styles.body}>
-
-                <View style={styles.container}>
-                    <Image
-                        style={styles.stretch}
-                        source={require('../assets/meetup.png')}
-                    />
-                    <Text style={styles.txt}> Meetup </Text>
+            <View style = {styles.body}>
+                <View style = {styles.container}>
+                        <Image
+                            style = {styles.stretch}
+                            source={require('../assets/meetup.png')}
+                        />
+                        <Text style={styles.txt}> Meetup </Text>
+                    </View>
+                    <View style={{marginBottom: 60}}>
+                        <Text style={styles.txt1}> Welcome back, </Text>
+                        <Text style={styles.txt2}> Sign in to continue </Text>
                 </View>
-                <View style={{ marginBottom: 60 }}>
-                    <Text style={styles.txt1}> Welcome back, </Text>
-                    <Text style={styles.txt2}> Sign in to continue </Text>
-                </View>
-
                 <CInput
                     control={control}
                     style={{ marginBottom: 30 }}
@@ -73,7 +70,6 @@ const Login: React.FC<Props> = (props: Props) => {
                     name="email"
                     secureTextEntry={false}
                 />
-
                 <CInput
                     control={control}
                     style={{ marginBottom: 30 }}
@@ -84,8 +80,7 @@ const Login: React.FC<Props> = (props: Props) => {
 
                     secureTextEntry={true}
                 />
-
-                <CButton
+                <CButton 
                     content="Sign In"
                     control={control}
                     style={{ borderRadius: 8, marginBottom: 180 }}
@@ -93,19 +88,18 @@ const Login: React.FC<Props> = (props: Props) => {
                     mode="contained"
                     onPress={handleSubmit(signInWIthCredentials)} />
                 <View style={styles.bottomView}>
-                    <Text style={styles.txt3}> Don't have an account? </Text>
-                    <Button
-                        style={{ borderRadius: 8, width: 110, padding: 0 }}
-                        labelStyle={{ fontSize: 12 }}
+                    <Text style={[styles.txt3, {color: 'white'}]}> Don't have an account? </Text>
+                    <Button 
+                        style={{borderRadius: 8, width: 110, padding: 0}}  
+                        labelStyle={{fontSize: 12}} 
                         mode="outlined"
                         onPress={() => props.navigation.push("SignUp")}
                     >
                         Sign Up
                     </Button>
                 </View>
-
             </View>
-        </KeyboardAvoidingView>
+        
     )
 }
 

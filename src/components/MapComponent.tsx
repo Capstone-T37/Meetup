@@ -134,6 +134,7 @@ const MapComponent = (props: Props) => {
     return (
         <View style={{ height: '100%' }}>
             <MapView
+                userInterfaceStyle = 'dark'
                 provider={Platform.OS == 'android' ? 'google' : undefined}
                 style={{ height: "100%", width: "100%" }}
                 initialRegion={initialPosition.current}

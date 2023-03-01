@@ -21,6 +21,7 @@ const CButton: React.FC<Props> = ({control, name, mode, content, onPress, style}
                 name = {name}
                 render = {() => {
                     return <Button 
+                        textColor='black'
                         style={style}
                         mode= {mode}
                         onPress={onPress}
