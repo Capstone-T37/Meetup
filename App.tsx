@@ -9,6 +9,7 @@ import { MD3LightTheme as DefaultTheme, Provider as PaperProvider } from 'react-
 import { NavigationContainer } from '@react-navigation/native';
 import Onboarding from './src/screens/Onboarding';
 import SignUp from './src/screens/SignUp';
+import SearchScreen from './src/screens/SearchScreen';
 
 const theme = {
   ...DefaultTheme,

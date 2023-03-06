@@ -6,12 +6,12 @@ import { Controller } from "react-hook-form";
 export interface Props {
     control: any; 
     name: any;
-    label: any; 
+    label?: any; 
     placeholder: any; 
     secureTextEntry: any;
     rules: any;
     style: any;
-    
+
 }
 
 const CInput: React.FC<Props> = ({control, name, label, style, rules = {}, placeholder, secureTextEntry}) => {
