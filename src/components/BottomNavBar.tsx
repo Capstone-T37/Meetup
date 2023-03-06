@@ -14,7 +14,7 @@ const BottomNavBar = (props: Props) => {
     const Tab = createBottomTabNavigator();
 
     return (
-        <Tab.Navigator screenOptions={{ headerShown: false }}>
+        <Tab.Navigator screenOptions={{ headerShown: false }} initialRouteName="Home">
             <Tab.Screen
                 name="Search"
                 component={SearchScreen}
