@@ -1,12 +1,12 @@
-import { FlatList, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
+import { FlatList, Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import React from 'react'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { Divider, TextInput } from 'react-native-paper';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import Feather from 'react-native-vector-icons/Feather';
-
 import { useForm } from "react-hook-form";
 import CInput from '../components/CInput';
+import AntDesign from 'react-native-vector-icons/AntDesign';
 
 type Props = {}
 
@@ -29,10 +29,10 @@ const SearchScreen = (props: Props) => {
 
     const data = [
         {
-            title: "Event 1",
+            title: "Lil Tjay + Killy Live In Ottawa March 8th",
             category: 'sports',
-            date: "2023-03-10",
-            address: "123 Main St",
+            date: "Fri, Mar 10, 8:00 PM",
+            address: "EY Centre • Ottawa, ON",
             size: 3,
             description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
             participants: ["John", "Jane", "Mike"],
@@ -62,25 +62,30 @@ const SearchScreen = (props: Props) => {
     const renderItem = ({ item }: { item: Event }) => {
         return (
             <TouchableOpacity style={styles.itemContainer}>
-                <View style={styles.icon}><MaterialIcons name='sports-soccer' size={50} color='white' /></View>
+                <Image
+                    style={styles.tinyLogo}
+                    source={{
+                    uri: 'https://img.evbuc.com/https%3A%2F%2Fcdn.evbuc.com%2Fimages%2F456441479%2F299947132686%2F1%2Foriginal.20230227-233246?w=512&auto=format%2Ccompress&q=75&sharp=10&rect=0%2C0%2C2160%2C1080&s=e048c8bfb09de06a91eca4d0233bc58c',
+                    }}
+                />
                 <View style={styles.textPart}>
                     <View >
                         <Text style={styles.itemTitle}>{item.title}</Text>
                     </View>
                     <View >
-                        <Text style={styles.itemDesciprion}>{item.description}</Text>
+                        <Text style={styles.itemDesciprion}>{item.date}</Text>
+                    </View>
+                    <View >
+                        <Text style={styles.address}>{item.address}</Text>
+                    </View>
+                    <View style={{flexDirection: 'row',
+        flexWrap: 'wrap'}}>
+                    <AntDesign style={{ color: 'white', marginRight: 10 }} name='user' size={20} />
+                    <Text style={styles.address}>{item.participants.length} participants</Text>
                     </View>
                 </View>
 
-                <View style={{ justifyContent: 'center', height: '100%' }}>
-
-                    <View style={styles.spots}>
-                        <Feather name='circle' color='blue' size={15} />
-                        <Feather name='circle' color='blue' size={15} />
-                        <Feather name='check-circle' color='green' size={15} />
-
-                    </View>
-                </View>
+                
 
             </TouchableOpacity>
         );
@@ -92,7 +97,7 @@ const SearchScreen = (props: Props) => {
                     <CInput
                         control={control}
                         style={{ marginBottom: 30 }}
-                        placeholder="Search"
+                        placeholder="Search events"
                         rules={() => { }}
                         name="search"
                         secureTextEntry={false} />
@@ -128,9 +133,8 @@ const styles = StyleSheet.create({
     input: {
     },
     itemContainer: {
-        height: 100,
+        height: 340,
         width: '100%',
-        flexDirection: 'row',
         backgroundColor: '#484848',
         borderRadius: 10,
         marginBottom: 10
@@ -146,23 +150,38 @@ const styles = StyleSheet.create({
         backgroundColor: 'blue',
     },
     textPart: {
-        width: '70%',
-        height: '100%',
-        justifyContent: 'space-evenly'
+        width: '100%',
+        height: '40%',
+        padding: 15,
+        justifyContent: 'space-evenly',
+        // borderColor: 'white',
+        // borderWidth: 1
 
     },
     itemTitle: {
         fontWeight: 'bold',
         fontSize: 20,
-        color: 'white'
+        color: 'white',
+        marginBottom: 5
     },
     itemDesciprion: {
-        color: 'white'
+        color: '#d1410c',
+        marginBottom: 7
     },
     spots: {
         width: 50,
         flexDirection: 'row',
         flexWrap: 'wrap',
 
-    }
+    },
+    tinyLogo: {
+        width: '100%',
+        height: '60%',
+      },
+      address: {
+        fontSize: 17,
+        color: 'white',
+        marginBottom: 11
+
+      }
 })
