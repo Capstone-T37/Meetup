@@ -4,6 +4,7 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 import Feather from 'react-native-vector-icons/Feather';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import { Button, Menu, Divider, Provider } from 'react-native-paper';
+import { NavigationContainer, useNavigation } from "@react-navigation/native";
 
 
 
@@ -15,48 +16,18 @@ type Props = {
 const ProfileScreen = (props: Props) => {
 
 
-
-  const [visible, setVisible] = React.useState(false);
-
-  const openMenu = () => setVisible(true);
-
-  const closeMenu = () => setVisible(false);
-
-  return (
-    <SafeAreaView style={styles.container}>
+    return (
+        <SafeAreaView style={styles.container}>
             <ScrollView showsVerticalScrollIndicator={false}>
                 <View style={styles.titleBar}>
 
-                    <Ionicons name="ios-arrow-back" color="white" size={24} onPress={() => props.navigation.goBack()} ></Ionicons>
+                    <Feather name="menu" onPress={props.navigation.openDrawer} size={24} color="white"></Feather>
+                </View>
 
-                    <Provider>
-                    <View
-                            style={{
-                    
-                            flexDirection: 'row',
-                            justifyContent: 'flex-end',
-                            }}>
-                            <Menu
-                            style ={{padding: 0}}
-                            visible={visible}
-                            onDismiss={closeMenu}
 
-                            anchor={<Feather name="more-vertical" onPress={openMenu} size={24} color="white"></Feather>}>
-
-                            <Menu.Item onPress={() => props.navigation.push("Login")} title="Log out" />
-                            </Menu>
-                    </View>
-                </Provider>
-                    
-                </View> 
-                
-                
                 <View style={{ alignSelf: "center" }}>
                     <View style={styles.profileImage}>
-                        <Image source={require("../assets/test.png")} style={styles.image} resizeMode='center'></Image>
-                    </View>
-                    <View style={styles.dm}>
-                        <MaterialIcons name="chat" size={18} color="#DFD8C8"></MaterialIcons>
+                        <Image source={require("../assets/test.png")} style={styles.image} resizeMode='cover'></Image>
                     </View>
                     <View style={styles.active}></View>
                     <View style={styles.add}>
@@ -90,10 +61,10 @@ const ProfileScreen = (props: Props) => {
                             <Image source={require('../assets/test.png')} style={styles.image} resizeMode='cover'></Image>
                         </View>
                         <View style={styles.mediaImageContainer}>
-                        <Image source={require('../assets/test.png')} style={styles.image} resizeMode='cover'></Image>
+                            <Image source={require('../assets/test.png')} style={styles.image} resizeMode='cover'></Image>
                         </View>
                         <View style={styles.mediaImageContainer}>
-                        <Image source={require('../assets/test.png')} style={styles.image} resizeMode='cover'></Image>
+                            <Image source={require('../assets/test.png')} style={styles.image} resizeMode='cover'></Image>
                         </View>
                     </ScrollView>
                     <View style={styles.mediaCount}>
@@ -107,7 +78,7 @@ const ProfileScreen = (props: Props) => {
                         <View style={styles.activityIndicator}></View>
                         <View style={{ width: 250 }}>
                             <Text style={[styles.text, { color: "white", fontWeight: "300" }]}>
-                                Meetup with <Text style={{ fontWeight: "400" }}>Jake Challeahe</Text> 
+                                Meetup with <Text style={{ fontWeight: "400" }}>Jake Challeahe</Text>
                             </Text>
                         </View>
                     </View>
@@ -123,7 +94,7 @@ const ProfileScreen = (props: Props) => {
                 </View>
             </ScrollView>
         </SafeAreaView>
-  )
+    )
 }
 
 export default ProfileScreen
@@ -159,9 +130,9 @@ const styles = StyleSheet.create({
         height: 200,
         borderRadius: 100,
         overflow: "hidden",
-        backgroundColor:'grey',
-        borderColor:'grey',
-        borderWidth:10
+        backgroundColor: 'grey',
+        borderColor: 'grey',
+        borderWidth: 10
     },
     dm: {
         backgroundColor: "#41444B",
@@ -252,5 +223,5 @@ const styles = StyleSheet.create({
         marginTop: 3,
         marginRight: 20
     },
-    
+
 })

@@ -7,6 +7,7 @@ import AntDesign from 'react-native-vector-icons/AntDesign'
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons'
 import ProfileScreen from '../screens/ProfileScreen';
 import SearchScreen from '../screens/SearchScreen';
+import DrawerNav from './DrawerNav';
 
 type Props = {}
 
@@ -14,7 +15,7 @@ const BottomNavBar = (props: Props) => {
     const Tab = createBottomTabNavigator();
 
     return (
-        <Tab.Navigator screenOptions={{ headerShown: false }}>
+        <Tab.Navigator screenOptions={{ headerShown: false }} initialRouteName="Home" >
             <Tab.Screen
                 name="Search"
                 component={SearchScreen}
@@ -34,7 +35,7 @@ const BottomNavBar = (props: Props) => {
 
             <Tab.Screen
                 name="Profile"
-                component={ProfileScreen}
+                component={DrawerNav}
                 options={{
                     tabBarLabelStyle: { color: 'white' },
                     tabBarStyle: { backgroundColor: 'rgb(39, 38, 39)' },
