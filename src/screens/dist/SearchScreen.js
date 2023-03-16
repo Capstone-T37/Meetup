@@ -69,9 +69,7 @@ var SearchScreen = function (props) {
             react_1["default"].createElement(react_native_1.View, { style: styles.input },
                 react_1["default"].createElement(CInput_1["default"], { control: control, style: { marginBottom: 30 }, placeholder: "Search events", rules: function () { }, name: "search", secureTextEntry: false })),
             react_1["default"].createElement(react_native_1.View, null,
-                react_1["default"].createElement(react_native_1.FlatList, { data: data, renderItem: renderItem, 
-                    //keyExtractor={(item) => item.id}
-                    style: styles.list })))));
+                react_1["default"].createElement(react_native_1.FlatList, { data: data, renderItem: renderItem, style: styles.list })))));
 };
 exports["default"] = SearchScreen;
 var styles = react_native_1.StyleSheet.create({

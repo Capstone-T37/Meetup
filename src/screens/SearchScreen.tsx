@@ -106,7 +106,6 @@ const SearchScreen = (props: Props) => {
                     <FlatList
                         data={data}
                         renderItem={renderItem}
-                        //keyExtractor={(item) => item.id}
                         style={styles.list}
                     />
                 </View>
@@ -154,9 +153,6 @@ const styles = StyleSheet.create({
         height: '40%',
         padding: 15,
         justifyContent: 'space-evenly',
-        // borderColor: 'white',
-        // borderWidth: 1
-
     },
     itemTitle: {
         fontWeight: 'bold',
