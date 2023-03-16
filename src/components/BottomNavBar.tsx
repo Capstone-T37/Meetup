@@ -9,6 +9,7 @@ import ProfileScreen from '../screens/ProfileScreen';
 import SearchScreen from '../screens/SearchScreen';
 import DrawerNav from './DrawerNav';
 
+
 type Props = {}
 
 const BottomNavBar = (props: Props) => {
