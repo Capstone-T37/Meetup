@@ -10,6 +10,7 @@ import { RootState } from '../redux/store'
 import { setPermission } from '../redux/slices/permissionSlice'
 import { check, PERMISSIONS } from 'react-native-permissions'
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { setId } from '../redux/slices/userIdSlice'
 
 
 type Props = {}
@@ -20,21 +21,21 @@ const Home = (rops: Props) => {
     useEffect(() => {
         (() => checkForPermission().then((res) => dispatch(setPermission(res))))();
         try {
-            (async () => await AsyncStorage.multiGet(["token", "id"]))().then((res) => console.log(res))
+            (async () => await AsyncStorage.multiGet(["token", "id"]))().then((res) => dispatch(setId(res[1][1])))
 
-        } catch (e) {
-            console.log(" could not be fetched!")
-        }
+} catch (e) {
+    console.log(" could not be fetched!")
+}
     }, [])
-    return (
-        <View style={styles.container}>
-            {
-                permitted ? <MapComponent /> : <PermissionAsk />
-            }
+return (
+    <View style={styles.container}>
+        {
+            permitted ? <MapComponent /> : <PermissionAsk />
+        }
 
 
-        </View>
-    )
+    </View>
+)
 }
 
 export default Home

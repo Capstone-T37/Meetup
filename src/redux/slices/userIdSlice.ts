@@ -3,18 +3,18 @@ import type { PayloadAction } from '@reduxjs/toolkit'
 import { LocationObject } from 'expo-location';
 
 export interface userIdState {
-    id: string
+    id: string | null
 }
 
 const initialState: userIdState = {
-    id: "",
+    id: null,
 }
 
 export const UserIdSlice = createSlice({
     name: 'id',
     initialState,
     reducers: {
-        setId: (state, action: PayloadAction<string>) => {
+        setId: (state, action: PayloadAction<string|null>) => {
             state.id = action.payload
         },
 
