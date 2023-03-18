@@ -1,4 +1,4 @@
-import { StyleSheet, View, Platform } from 'react-native'
+import { StyleSheet, View, Platform, Text } from 'react-native'
 import React, { useCallback, useRef, useState } from 'react'
 import MapView from "react-native-map-clustering";
 import { Marker } from 'react-native-maps';
@@ -7,6 +7,10 @@ import * as Location from 'expo-location';
 import { useSelector } from 'react-redux'
 import { RootState } from '../redux/store'
 import { useFocusEffect } from '@react-navigation/native';
+import MaterialIcons from 'react-native-vector-icons/MaterialIcons'
+import CustomMarker from './CustomMarker';
+import BottomSheet from "@gorhom/bottom-sheet";
+import DetachedSheet from './DetachedSheet';
 
 type Props = {}
 const MapComponent = (props: Props) => {
@@ -24,6 +28,7 @@ const MapComponent = (props: Props) => {
 
     const [loading, setLoading] = useState(true);
 
+    const bottomSheetRef = React.useRef<BottomSheet>(null);
 
     useFocusEffect(
         useCallback(() => {
@@ -53,12 +58,16 @@ const MapComponent = (props: Props) => {
                 initialRegion={initialPosition.current}
                 showsUserLocation={true}
             >
+
+
                 {
                     locations.map((val, index) => (
-                        val?.user_id !== id ? <Marker coordinate={{ latitude: val?.location?.coordinates[1], longitude: val?.location?.coordinates[0] }} key={index} /> : undefined
+                        val?.user_id !== id ? <CustomMarker coordinate={{ latitude: val?.location?.coordinates[1], longitude: val?.location?.coordinates[0] }} key={index} bottomSheetRef={bottomSheetRef} /> : undefined
                     ))
                 }
             </MapView>
+            <DetachedSheet bottomSheetRef={bottomSheetRef} />
+
         </View>
     )
 }
