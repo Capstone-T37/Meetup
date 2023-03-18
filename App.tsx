@@ -9,7 +9,7 @@ import { MD3LightTheme as DefaultTheme, Provider as PaperProvider } from 'react-
 import { NavigationContainer } from '@react-navigation/native';
 import Onboarding from './src/screens/Onboarding';
 import SignUp from './src/screens/SignUp';
-
+import { GestureHandlerRootView } from "react-native-gesture-handler";
 const theme = {
   ...DefaultTheme,
   colors: {
@@ -23,34 +23,37 @@ const Stack = createNativeStackNavigator()
 
 const App = () => {
   return (
-    <StoreProvider store={store}>
-      <PaperProvider theme={theme}>
-        <NavigationContainer>
-          <Stack.Navigator>
-            <Stack.Screen
-              name="Login"
-              component={Login}
-              options={{ headerShown: false }}
-            />
-            <Stack.Screen
-              name="Session"
-              component={BottomNavBar}
-              options={{ headerShown: false }}
-            />
-            <Stack.Screen
-              name="SignUp"
-              component={SignUp}
-              options={{ headerShown: false }}
-            />
-            <Stack.Screen
-              name="onboarding"
-              component={Onboarding}
-              options={{ headerShown: false }}
-            />
-          </Stack.Navigator>
-        </NavigationContainer>
-      </PaperProvider>
-    </StoreProvider>
+    <GestureHandlerRootView style={{ flex: 1 }}>
+
+      <StoreProvider store={store}>
+        <PaperProvider theme={theme}>
+          <NavigationContainer>
+            <Stack.Navigator>
+              <Stack.Screen
+                name="Login"
+                component={Login}
+                options={{ headerShown: false }}
+              />
+              <Stack.Screen
+                name="Session"
+                component={BottomNavBar}
+                options={{ headerShown: false }}
+              />
+              <Stack.Screen
+                name="SignUp"
+                component={SignUp}
+                options={{ headerShown: false }}
+              />
+              <Stack.Screen
+                name="onboarding"
+                component={Onboarding}
+                options={{ headerShown: false }}
+              />
+            </Stack.Navigator>
+          </NavigationContainer>
+        </PaperProvider>
+      </StoreProvider>
+    </GestureHandlerRootView>
 
   );
 };
