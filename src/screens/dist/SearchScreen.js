@@ -6,44 +6,22 @@ var react_native_safe_area_context_1 = require("react-native-safe-area-context")
 var react_hook_form_1 = require("react-hook-form");
 var CInput_1 = require("../components/CInput");
 var AntDesign_1 = require("react-native-vector-icons/AntDesign");
+var ApiService_1 = require("../services/ApiService");
+var routes_1 = require("../routes/routes");
 var SearchScreen = function (props) {
     var _a = react_hook_form_1.useForm({
         defaultValues: {
             search: ''
         }
     }), handleSubmit = _a.handleSubmit, control = _a.control;
-    var data = [
-        {
-            title: "Lil Tjay + Killy Live In Ottawa March 8th",
-            category: 'sports',
-            date: "Fri, Mar 10, 8:00 PM",
-            address: "EY Centre • Ottawa, ON",
-            size: 3,
-            description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-            participants: ["John", "Jane", "Mike"],
-            created_by: "Alice"
-        },
-        {
-            title: "Event 2",
-            category: 'study',
-            date: "2023-04-15",
-            address: "456 Second Ave",
-            size: 4,
-            description: "Nulla eget nulla euismod, faucibus odio vitae, auctor arcu.",
-            participants: ["Sarah", "Tom"],
-            created_by: "Bob"
-        },
-        {
-            title: "Event 3",
-            category: 'leasure',
-            date: "2023-05-20",
-            address: "789 Third St",
-            size: 3,
-            description: "Etiam commodo consectetur neque vitae commodo.",
-            participants: ["David"],
-            created_by: "Charlie"
-        }
-    ];
+    var _b = react_1.useState([]), activities = _b[0], setActivities = _b[1];
+    react_1.useEffect(function () {
+        var domain = routes_1.routes.activityHost + routes_1.routes.activityEndPoint;
+        ApiService_1.getRequest(domain).then(function (resp) {
+            var data = resp === null || resp === void 0 ? void 0 : resp.data;
+            setActivities(data);
+        });
+    });
     var renderItem = function (_a) {
         var item = _a.item;
         return (react_1["default"].createElement(react_native_1.TouchableOpacity, { style: styles.itemContainer },
@@ -69,7 +47,7 @@ var SearchScreen = function (props) {
             react_1["default"].createElement(react_native_1.View, { style: styles.input },
                 react_1["default"].createElement(CInput_1["default"], { control: control, style: { marginBottom: 30 }, placeholder: "Search events", rules: function () { }, name: "search", secureTextEntry: false })),
             react_1["default"].createElement(react_native_1.View, null,
-                react_1["default"].createElement(react_native_1.FlatList, { data: data, renderItem: renderItem, style: styles.list })))));
+                react_1["default"].createElement(react_native_1.FlatList, { data: activities, renderItem: renderItem, style: styles.list })))));
 };
 exports["default"] = SearchScreen;
 var styles = react_native_1.StyleSheet.create({

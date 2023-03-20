@@ -1,12 +1,11 @@
 import { FlatList, Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { SafeAreaView } from 'react-native-safe-area-context'
-import { Divider, TextInput } from 'react-native-paper';
-import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
-import Feather from 'react-native-vector-icons/Feather';
 import { useForm } from "react-hook-form";
 import CInput from '../components/CInput';
 import AntDesign from 'react-native-vector-icons/AntDesign';
+import { getRequest } from '../services/ApiService';
+import { routes } from '../routes/routes';
 
 type Props = {}
 
@@ -16,6 +15,7 @@ const SearchScreen = (props: Props) => {
             search: '',
         }
     });
+    const [activities, setActivities] = useState([])
     interface Event {
         title: string;
         category: string;
@@ -27,38 +27,15 @@ const SearchScreen = (props: Props) => {
         created_by: string;
     }
 
-    const data = [
-        {
-            title: "Lil Tjay + Killy Live In Ottawa March 8th",
-            category: 'sports',
-            date: "Fri, Mar 10, 8:00 PM",
-            address: "EY Centre • Ottawa, ON",
-            size: 3,
-            description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-            participants: ["John", "Jane", "Mike"],
-            created_by: "Alice"
-        },
-        {
-            title: "Event 2",
-            category: 'study',
-            date: "2023-04-15",
-            address: "456 Second Ave",
-            size: 4,
-            description: "Nulla eget nulla euismod, faucibus odio vitae, auctor arcu.",
-            participants: ["Sarah", "Tom"],
-            created_by: "Bob"
-        },
-        {
-            title: "Event 3",
-            category: 'leasure',
-            date: "2023-05-20",
-            address: "789 Third St",
-            size: 3,
-            description: "Etiam commodo consectetur neque vitae commodo.",
-            participants: ["David"],
-            created_by: "Charlie"
+    useEffect( () => {
+            let domain = routes.activityHost + routes.activityEndPoint
+            getRequest(domain).then(resp => {
+                let data = resp?.data
+                setActivities(data)
+            })
         }
-    ];
+    )
+
     const renderItem = ({ item }: { item: Event }) => {
         return (
             <TouchableOpacity style={styles.itemContainer}>
@@ -104,7 +81,7 @@ const SearchScreen = (props: Props) => {
                 </View>
                 <View>
                     <FlatList
-                        data={data}
+                        data={activities}
                         renderItem={renderItem}
                         style={styles.list}
                     />
