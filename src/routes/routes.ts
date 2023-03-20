@@ -5,5 +5,8 @@ export const routes = {
     userHost:'http://localhost:3000',
     user:'/api/v1/users',
     locationHost:'http://localhost:3030',
-    location:'/api/v1/locations'
+    location:'/api/v1/locations',
+    activityHost: 'http://localhost:3050',
+    activityEndPoint: '/api/v1/activities',
+
 }
