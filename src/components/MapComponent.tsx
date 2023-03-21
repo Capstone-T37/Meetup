@@ -11,6 +11,8 @@ import CustomMarker from './CustomMarker';
 import BottomSheet from "@gorhom/bottom-sheet";
 import DetachedSheet from './DetachedSheet';
 import Feather from 'react-native-vector-icons/Feather';
+import ActivityBottomSheet from './ActivityBottomSheet';
+
 
 type Props = {}
 const MapComponent = (props: Props) => {
@@ -30,6 +32,7 @@ const MapComponent = (props: Props) => {
     const [loading, setLoading] = useState(true);
 
     const bottomSheetRef = React.useRef<BottomSheet>(null);
+    const activityBottomSheet = React.useRef<BottomSheet>(null);
 
     useFocusEffect(
         useCallback(() => {
@@ -64,7 +67,10 @@ const MapComponent = (props: Props) => {
                 }
                 {
                     activityLocations.map((activity, index) => (
-                        <Marker coordinate={{ latitude: activity.lat, longitude: activity.lng }} key={index} pinColor="green" > 
+                        <Marker coordinate={{ latitude: activity.lat, longitude: activity.lng }} key={index} pinColor="green" 
+                        onPress={() => {
+                            activityBottomSheet.current?.expand()
+                            }}> 
                             <Feather 
                                 name='twitter' 
                                 size = {20}
@@ -77,6 +83,7 @@ const MapComponent = (props: Props) => {
                 }
             </MapView>
             <DetachedSheet bottomSheetRef={bottomSheetRef} />
+            <ActivityBottomSheet bottomSheetRef={activityBottomSheet} />
 
         </View>
     )

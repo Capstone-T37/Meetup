@@ -47,6 +47,7 @@ var native_1 = require("@react-navigation/native");
 var CustomMarker_1 = require("./CustomMarker");
 var DetachedSheet_1 = require("./DetachedSheet");
 var Feather_1 = require("react-native-vector-icons/Feather");
+var ActivityBottomSheet_1 = require("./ActivityBottomSheet");
 var MapComponent = function (props) {
     var locations = react_redux_1.useSelector(function (state) { return state.locations.locations; });
     var activityLocations = react_redux_1.useSelector(function (state) { return state.activityLocations.locations; });
@@ -59,6 +60,7 @@ var MapComponent = function (props) {
     });
     var _a = react_1.useState(true), loading = _a[0], setLoading = _a[1];
     var bottomSheetRef = react_1["default"].useRef(null);
+    var activityBottomSheet = react_1["default"].useRef(null);
     native_1.useFocusEffect(react_1.useCallback(function () {
         (function () { return __awaiter(void 0, void 0, void 0, function () {
             return __generator(this, function (_a) {
@@ -81,11 +83,15 @@ var MapComponent = function (props) {
                 var _a, _b;
                 return ((val === null || val === void 0 ? void 0 : val.user_id) !== id ? react_1["default"].createElement(CustomMarker_1["default"], { coordinate: { latitude: (_a = val === null || val === void 0 ? void 0 : val.location) === null || _a === void 0 ? void 0 : _a.coordinates[1], longitude: (_b = val === null || val === void 0 ? void 0 : val.location) === null || _b === void 0 ? void 0 : _b.coordinates[0] }, key: index, bottomSheetRef: bottomSheetRef }) : undefined);
             }),
-            activityLocations.map(function (activity, index) { return (react_1["default"].createElement(react_native_maps_1.Marker, { coordinate: { latitude: activity.lat, longitude: activity.lng }, key: index, pinColor: "green" },
+            activityLocations.map(function (activity, index) { return (react_1["default"].createElement(react_native_maps_1.Marker, { coordinate: { latitude: activity.lat, longitude: activity.lng }, key: index, pinColor: "green", onPress: function () {
+                    var _a;
+                    (_a = activityBottomSheet.current) === null || _a === void 0 ? void 0 : _a.expand();
+                } },
                 react_1["default"].createElement(Feather_1["default"], { name: 'twitter', size: 20, style: {
                         backgroundColor: 'pink'
                     } }))); })),
-        react_1["default"].createElement(DetachedSheet_1["default"], { bottomSheetRef: bottomSheetRef })));
+        react_1["default"].createElement(DetachedSheet_1["default"], { bottomSheetRef: bottomSheetRef }),
+        react_1["default"].createElement(ActivityBottomSheet_1["default"], { bottomSheetRef: activityBottomSheet })));
 };
 exports["default"] = MapComponent;
 var styles = react_native_1.StyleSheet.create({});
