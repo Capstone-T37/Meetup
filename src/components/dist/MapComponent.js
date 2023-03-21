@@ -46,6 +46,7 @@ var react_redux_1 = require("react-redux");
 var native_1 = require("@react-navigation/native");
 var CustomMarker_1 = require("./CustomMarker");
 var DetachedSheet_1 = require("./DetachedSheet");
+var Feather_1 = require("react-native-vector-icons/Feather");
 var MapComponent = function (props) {
     var locations = react_redux_1.useSelector(function (state) { return state.locations.locations; });
     var activityLocations = react_redux_1.useSelector(function (state) { return state.activityLocations.locations; });
@@ -63,7 +64,7 @@ var MapComponent = function (props) {
             return __generator(this, function (_a) {
                 return [2 /*return*/, Location.getCurrentPositionAsync({}).then(function (res) {
                         initialPosition.current = {
-                            latitude: res.coords.latitude, longitude: res.coords.longitude, latitudeDelta: 0.122,
+                            latitude: 45.424721, longitude: -75.6972, latitudeDelta: 0.122,
                             longitudeDelta: 0.121
                         };
                         setLoading(false);
@@ -80,10 +81,10 @@ var MapComponent = function (props) {
                 var _a, _b;
                 return ((val === null || val === void 0 ? void 0 : val.user_id) !== id ? react_1["default"].createElement(CustomMarker_1["default"], { coordinate: { latitude: (_a = val === null || val === void 0 ? void 0 : val.location) === null || _a === void 0 ? void 0 : _a.coordinates[1], longitude: (_b = val === null || val === void 0 ? void 0 : val.location) === null || _b === void 0 ? void 0 : _b.coordinates[0] }, key: index, bottomSheetRef: bottomSheetRef }) : undefined);
             }),
-            activityLocations.map(function (val, index) {
-                var _a, _b;
-                return (react_1["default"].createElement(react_native_maps_1.Marker, { coordinate: { latitude: (_a = val === null || val === void 0 ? void 0 : val.location) === null || _a === void 0 ? void 0 : _a.coordinates[1], longitude: (_b = val === null || val === void 0 ? void 0 : val.location) === null || _b === void 0 ? void 0 : _b.coordinates[0] }, key: index }));
-            })),
+            activityLocations.map(function (activity, index) { return (react_1["default"].createElement(react_native_maps_1.Marker, { coordinate: { latitude: activity.lat, longitude: activity.lng }, key: index, pinColor: "green" },
+                react_1["default"].createElement(Feather_1["default"], { name: 'twitter', size: 20, style: {
+                        backgroundColor: 'pink'
+                    } }))); })),
         react_1["default"].createElement(DetachedSheet_1["default"], { bottomSheetRef: bottomSheetRef })));
 };
 exports["default"] = MapComponent;

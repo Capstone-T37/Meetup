@@ -4,6 +4,8 @@ import { SafeAreaView } from 'react-native-safe-area-context'
 import { useForm } from "react-hook-form";
 import CInput from '../components/CInput';
 import AntDesign from 'react-native-vector-icons/AntDesign';
+import { useSelector } from 'react-redux';
+import { RootState } from '../redux/store';
 
 type Props = {}
 
@@ -15,6 +17,11 @@ const SearchScreen = (props: Props) => {
             search: '',
         }
     });
+
+    const activitiesStore: Array<any> = useSelector((state: RootState) => state.activities.activities)
+
+    const [activities, setActivities] = useState(new Array())
+
     interface Event {
         title: string;
         category: string;
@@ -27,7 +34,7 @@ const SearchScreen = (props: Props) => {
     }
 
     useEffect( () => {
-            //TO-DO
+        setActivities(activitiesStore)
         }
     )
 
@@ -76,7 +83,7 @@ const SearchScreen = (props: Props) => {
                 </View>
                 <View>
                     <FlatList
-                        data={[]}
+                        data={activities}
                         renderItem={renderItem}
                         style={styles.list}
                     />

@@ -7,10 +7,10 @@ import * as Location from 'expo-location';
 import { useSelector } from 'react-redux'
 import { RootState } from '../redux/store'
 import { useFocusEffect } from '@react-navigation/native';
-import MaterialIcons from 'react-native-vector-icons/MaterialIcons'
 import CustomMarker from './CustomMarker';
 import BottomSheet from "@gorhom/bottom-sheet";
 import DetachedSheet from './DetachedSheet';
+import Feather from 'react-native-vector-icons/Feather';
 
 type Props = {}
 const MapComponent = (props: Props) => {
@@ -35,7 +35,7 @@ const MapComponent = (props: Props) => {
         useCallback(() => {
             (async () => Location.getCurrentPositionAsync({}).then((res) => {
                 initialPosition.current = {
-                    latitude: res.coords.latitude, longitude: res.coords.longitude, latitudeDelta: 0.122,
+                    latitude: 45.424721, longitude: -75.6972, latitudeDelta: 0.122,
                     longitudeDelta: 0.121,
                 }
                 setLoading(false);
@@ -43,8 +43,6 @@ const MapComponent = (props: Props) => {
             }))()
         }, [])
     )
-
-
     if (loading) {
         return (
             <ActivityIndicator size="large" color="#0000ff" />
@@ -65,8 +63,16 @@ const MapComponent = (props: Props) => {
                     ))
                 }
                 {
-                    activityLocations.map((val, index) => (
-                        <Marker coordinate={{ latitude: val?.location?.coordinates[1], longitude: val?.location?.coordinates[0] }} key={index}/> 
+                    activityLocations.map((activity, index) => (
+                        <Marker coordinate={{ latitude: activity.lat, longitude: activity.lng }} key={index} pinColor="green" > 
+                            <Feather 
+                                name='twitter' 
+                                size = {20}
+                                style ={{
+                                    backgroundColor: 'pink',
+                                }}
+                                 /> 
+                        </Marker>
                     ))
                 }
             </MapView>

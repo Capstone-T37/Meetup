@@ -6,14 +6,17 @@ var react_native_safe_area_context_1 = require("react-native-safe-area-context")
 var react_hook_form_1 = require("react-hook-form");
 var CInput_1 = require("../components/CInput");
 var AntDesign_1 = require("react-native-vector-icons/AntDesign");
+var react_redux_1 = require("react-redux");
 var SearchScreen = function (props) {
     var _a = react_hook_form_1.useForm({
         defaultValues: {
             search: ''
         }
     }), handleSubmit = _a.handleSubmit, control = _a.control;
+    var activitiesStore = react_redux_1.useSelector(function (state) { return state.activities.activities; });
+    var _b = react_1.useState(new Array()), activities = _b[0], setActivities = _b[1];
     react_1.useEffect(function () {
-        //TO-DO
+        setActivities(activitiesStore);
     });
     var renderItem = function (_a) {
         var item = _a.item;
@@ -40,7 +43,7 @@ var SearchScreen = function (props) {
             react_1["default"].createElement(react_native_1.View, { style: styles.input },
                 react_1["default"].createElement(CInput_1["default"], { control: control, style: { marginBottom: 30 }, placeholder: "Search events", rules: function () { }, name: "search", secureTextEntry: false })),
             react_1["default"].createElement(react_native_1.View, null,
-                react_1["default"].createElement(react_native_1.FlatList, { data: [], renderItem: renderItem, style: styles.list })))));
+                react_1["default"].createElement(react_native_1.FlatList, { data: activities, renderItem: renderItem, style: styles.list })))));
 };
 exports["default"] = SearchScreen;
 var styles = react_native_1.StyleSheet.create({
