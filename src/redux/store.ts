@@ -2,11 +2,13 @@ import { configureStore } from '@reduxjs/toolkit'
 import locationsReducer from './slices/locationsSlice'
 import permissionReducer from './slices/permissionSlice'
 import userIdReducer from './slices/userIdSlice'
+import { activityLocationsSlice } from './slices/activityLocationSlice'
 
 export const store = configureStore({
   reducer: {
     permission: permissionReducer,
     locations: locationsReducer,
+    activityLocations: locationsReducer,
     id: userIdReducer
   },
 })

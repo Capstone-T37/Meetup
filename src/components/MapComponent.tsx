@@ -16,6 +16,7 @@ type Props = {}
 const MapComponent = (props: Props) => {
 
     const locations = useSelector((state: RootState) => state.locations.locations)
+    const activityLocations = useSelector((state: RootState) => state.activityLocations.locations)
     const id = useSelector((state: RootState) => state.id.id)
 
 
@@ -58,11 +59,14 @@ const MapComponent = (props: Props) => {
                 initialRegion={initialPosition.current}
                 showsUserLocation={true}
             >
-
-
                 {
                     locations.map((val, index) => (
                         val?.user_id !== id ? <CustomMarker coordinate={{ latitude: val?.location?.coordinates[1], longitude: val?.location?.coordinates[0] }} key={index} bottomSheetRef={bottomSheetRef} /> : undefined
+                    ))
+                }
+                {
+                    activityLocations.map((val, index) => (
+                        <Marker coordinate={{ latitude: val?.location?.coordinates[1], longitude: val?.location?.coordinates[0] }} key={index}/> 
                     ))
                 }
             </MapView>
