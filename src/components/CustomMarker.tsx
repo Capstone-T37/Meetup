@@ -13,8 +13,6 @@ const CustomMarker = (props: any) => {
         <>
             <Marker {...props} onPress={() => {
                 props.bottomSheetRef.current?.expand()
-                console.log(props.bottomSheetRef);
-
             }}>
                 <MaterialIcons name='location-history' size={90} />
             </Marker>

@@ -12,9 +12,6 @@ import { styles } from '../styles/login'
 import { routes } from '../routes/routes';
 
 import { asyncStoreMulti, getRequest, postRequest } from '../services/ApiService';
-import { asyncStore } from '../services/ApiService';
-
-import Popup from '../components/Popup';
 import axios from 'axios';
 import { useDispatch } from 'react-redux'
 import { setId } from '../redux/slices/userIdSlice';
