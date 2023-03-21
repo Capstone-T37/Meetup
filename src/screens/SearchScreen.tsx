@@ -4,10 +4,12 @@ import { SafeAreaView } from 'react-native-safe-area-context'
 import { useForm } from "react-hook-form";
 import CInput from '../components/CInput';
 import AntDesign from 'react-native-vector-icons/AntDesign';
-import { getRequest } from '../services/ApiService';
-import { routes } from '../routes/routes';
+import { useSelector } from 'react-redux';
+import { RootState } from '../redux/store';
 
 type Props = {}
+
+
 
 const SearchScreen = (props: Props) => {
     const { handleSubmit, control } = useForm({
@@ -15,7 +17,11 @@ const SearchScreen = (props: Props) => {
             search: '',
         }
     });
-    const [activities, setActivities] = useState([])
+
+    const activitiesStore: Array<any> = useSelector((state: RootState) => state.activities.activities)
+
+    const [activities, setActivities] = useState(new Array())
+
     interface Event {
         title: string;
         category: string;
@@ -28,11 +34,7 @@ const SearchScreen = (props: Props) => {
     }
 
     useEffect( () => {
-            let domain = routes.activityHost + routes.activityEndPoint
-            getRequest(domain).then(resp => {
-                let data = resp?.data
-                setActivities(data)
-            })
+        setActivities(activitiesStore)
         }
     )
 

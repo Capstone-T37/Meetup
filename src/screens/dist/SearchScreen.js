@@ -6,21 +6,17 @@ var react_native_safe_area_context_1 = require("react-native-safe-area-context")
 var react_hook_form_1 = require("react-hook-form");
 var CInput_1 = require("../components/CInput");
 var AntDesign_1 = require("react-native-vector-icons/AntDesign");
-var ApiService_1 = require("../services/ApiService");
-var routes_1 = require("../routes/routes");
+var react_redux_1 = require("react-redux");
 var SearchScreen = function (props) {
     var _a = react_hook_form_1.useForm({
         defaultValues: {
             search: ''
         }
     }), handleSubmit = _a.handleSubmit, control = _a.control;
-    var _b = react_1.useState([]), activities = _b[0], setActivities = _b[1];
+    var activitiesStore = react_redux_1.useSelector(function (state) { return state.activities.activities; });
+    var _b = react_1.useState(new Array()), activities = _b[0], setActivities = _b[1];
     react_1.useEffect(function () {
-        var domain = routes_1.routes.activityHost + routes_1.routes.activityEndPoint;
-        ApiService_1.getRequest(domain).then(function (resp) {
-            var data = resp === null || resp === void 0 ? void 0 : resp.data;
-            setActivities(data);
-        });
+        setActivities(activitiesStore);
     });
     var renderItem = function (_a) {
         var item = _a.item;
