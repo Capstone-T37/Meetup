@@ -1,4 +1,4 @@
-import { StyleSheet, View, Platform, Text } from 'react-native'
+import { View, Platform } from 'react-native'
 import React, { useCallback, useRef, useState } from 'react'
 import MapView from "react-native-map-clustering";
 import { Marker } from 'react-native-maps';
@@ -90,5 +90,3 @@ const MapComponent = (props: Props) => {
 }
 
 export default MapComponent
-
-const styles = StyleSheet.create({})

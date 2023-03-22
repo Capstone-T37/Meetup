@@ -1,5 +1,5 @@
 import { StyleSheet, Text, View, SafeAreaView } from 'react-native'
-import React, { useEffect } from 'react'
+import React from 'react'
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import SimpleLineIcons from 'react-native-vector-icons/SimpleLineIcons';
 import Feather from 'react-native-vector-icons/Feather';

@@ -94,4 +94,3 @@ var MapComponent = function (props) {
         react_1["default"].createElement(ActivityBottomSheet_1["default"], { bottomSheetRef: activityBottomSheet })));
 };
 exports["default"] = MapComponent;
-var styles = react_native_1.StyleSheet.create({});

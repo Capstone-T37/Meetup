@@ -13,7 +13,6 @@ import { getRequest } from '../services/ApiService'
 import { routes } from '../routes/routes'
 import { setActivities } from '../redux/slices/activitySlice'
 import { setActivityLocations } from '../redux/slices/activityLocationSlice'
-import { setLocations } from '../redux/slices/locationsSlice'
 
 type Props = {}
 Geocoder.init("AIzaSyDYC0H9ezO956jUEz7tu6XhEpTOwknL0iA");
