@@ -2,6 +2,10 @@ import { StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import React, { useMemo, useState } from 'react'
 import BottomSheet from "@gorhom/bottom-sheet";
 import Handle from './BottomSheetHandle';
+import { Button } from 'react-native';
+import AntDesign from 'react-native-vector-icons/AntDesign'
+import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
+import CustomFooter from './CustomFooter';
 
 
 
@@ -27,17 +31,30 @@ const ActivityBottomSheet = (props: any) => {
             handleComponent={Handle}
             enablePanDownToClose={true}
             style={styles.sheetContainer}
+            footerComponent={CustomFooter}
         >
             <View style={styles.container}>
+                
                 <View style = {{
                     borderBottomColor: 'white',
                     borderBottomWidth: 1,
                     marginBottom: 40,
-                    padding: 20
+                    padding: 20,
+                    display: 'flex',
+                    flexDirection: 'row'
                 }}>
-                <Text style={styles.textstyle}>Yoga </Text>
+                    <View style = {{borderColor: 'white'}}>
+                <Text style={styles.textstyle}>{props.title} </Text>
                 </View>
-                <Text style={styles.desc}>Yoga is an ancient practice that originated in India over 5,000 years ago. The word "yoga" is derived from the Sanskrit word "yuj," which means to yoke or unite. It is a holistic approach to wellness that integrates the mind, body, and spirit. The practice of yoga involves a combination of physical postures, breathing exercises, and meditation techniques. </Text>
+                <TouchableOpacity  
+                    onPress={() => {
+                        props.bottomSheetRef.current.close()
+                    }}
+                    style={styles.button}>
+                    <MaterialIcons name="close" size={24} color="#909B9B" />
+                </TouchableOpacity>
+                </View>
+                <Text style={styles.desc}> {props.description} </Text>
             </View>
             
 
@@ -74,6 +91,7 @@ const styles = StyleSheet.create({
         color: 'white',
         fontSize: 45,
         fontWeight: 'bold',
+        
       
         
     }, desc : {
@@ -85,6 +103,18 @@ const styles = StyleSheet.create({
         width: '100%',
         padding: 30,
         paddingTop: 0
+    },
+    button: {
+        backgroundColor: '#484E4E',
+        width: 35,
+        height: 35,
+        alignItems: 'center',
+        position: 'absolute',
+        right: 5,
+        top: 5,
+        borderRadius: 20,
+        paddingTop: '18%'
+
     }
     
 })

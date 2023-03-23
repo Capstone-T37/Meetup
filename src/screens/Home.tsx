@@ -13,7 +13,6 @@ import { getRequest } from '../services/ApiService'
 import { routes } from '../routes/routes'
 import { setActivities } from '../redux/slices/activitySlice'
 import { setActivityLocations } from '../redux/slices/activityLocationSlice'
-import { setLocations } from '../redux/slices/locationsSlice'
 
 type Props = {}
 Geocoder.init("AIzaSyDYC0H9ezO956jUEz7tu6XhEpTOwknL0iA");
@@ -41,7 +40,7 @@ const Home = (props: Props) => {
                 try {
                     const json = await Geocoder.from(activity.address)
                     var location = json.results[0].geometry.location
-                    return location
+                    return {loc: location, id: activity._id}
                 } catch (error) {
                     console.warn(error)
                     return null

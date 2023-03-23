@@ -88,7 +88,7 @@ var Home = function (props) {
                                 case 1:
                                     json = _a.sent();
                                     location = json.results[0].geometry.location;
-                                    return [2 /*return*/, location];
+                                    return [2 /*return*/, { loc: location, id: activity._id }];
                                 case 2:
                                     error_1 = _a.sent();
                                     console.warn(error_1);

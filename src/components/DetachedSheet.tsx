@@ -1,12 +1,8 @@
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import React, { useState } from 'react'
 import BottomSheet from "@gorhom/bottom-sheet";
-import { Button } from 'react-native-paper';
 import Ionicons from 'react-native-vector-icons/Ionicons'
 import AntDesign from 'react-native-vector-icons/AntDesign'
-
-
-
 
 const DetachedSheet = (props: any) => {
     const [meet, setMeet] = useState(false)

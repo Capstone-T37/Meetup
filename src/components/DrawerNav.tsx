@@ -1,5 +1,5 @@
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native'
-import React, { useState } from 'react'
+import React from 'react'
 import { createDrawerNavigator } from '@react-navigation/drawer'
 import ProfileScreen from '../screens/ProfileScreen'
 import { SafeAreaView } from 'react-native-safe-area-context'
@@ -7,8 +7,7 @@ import { Button } from 'react-native-paper'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import { Switch } from 'react-native-paper';
 import LocationService from '../services/LocationService';
-import { useDispatch, useSelector } from 'react-redux'
-import { RootState } from '../redux/store'
+import { useDispatch } from 'react-redux'
 import SocketService from '../services/SocketService'
 import { deleteRequest, getRequest, patchRequest, postRequest } from '../services/ApiService'
 import { routes } from '../routes/routes'
