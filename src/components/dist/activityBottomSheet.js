@@ -5,6 +5,7 @@ var react_1 = require("react");
 var bottom_sheet_1 = require("@gorhom/bottom-sheet");
 var BottomSheetHandle_1 = require("./BottomSheetHandle");
 var MaterialIcons_1 = require("react-native-vector-icons/MaterialIcons");
+var CustomFooter_1 = require("./CustomFooter");
 var ActivityBottomSheet = function (props) {
     var _a = react_1.useState(false), meet = _a[0], setMeet = _a[1];
     // variables
@@ -15,7 +16,7 @@ var ActivityBottomSheet = function (props) {
         // add bottom inset to elevate the sheet
         bottomInset: 0, 
         // set `detached` to true
-        detached: false, handleComponent: BottomSheetHandle_1["default"], enablePanDownToClose: true, style: styles.sheetContainer },
+        detached: false, handleComponent: BottomSheetHandle_1["default"], enablePanDownToClose: true, style: styles.sheetContainer, footerComponent: CustomFooter_1["default"] },
         react_1["default"].createElement(react_native_1.View, { style: styles.container },
             react_1["default"].createElement(react_native_1.View, { style: {
                     borderBottomColor: 'white',
@@ -26,12 +27,17 @@ var ActivityBottomSheet = function (props) {
                     flexDirection: 'row'
                 } },
                 react_1["default"].createElement(react_native_1.View, { style: { borderColor: 'white' } },
-                    react_1["default"].createElement(react_native_1.Text, { style: styles.textstyle }, "Yoga ")),
+                    react_1["default"].createElement(react_native_1.Text, { style: styles.textstyle },
+                        props.title,
+                        " ")),
                 react_1["default"].createElement(react_native_1.TouchableOpacity, { onPress: function () {
                         props.bottomSheetRef.current.close();
                     }, style: styles.button },
                     react_1["default"].createElement(MaterialIcons_1["default"], { name: "close", size: 24, color: "#909B9B" }))),
-            react_1["default"].createElement(react_native_1.Text, { style: styles.desc }, "Yoga is an ancient practice that originated in India over 5,000 years ago. The word \"yoga\" is derived from the Sanskrit word \"yuj,\" which means to yoke or unite. It is a holistic approach to wellness that integrates the mind, body, and spirit. The practice of yoga involves a combination of physical postures, breathing exercises, and meditation techniques. "))));
+            react_1["default"].createElement(react_native_1.Text, { style: styles.desc },
+                " ",
+                props.description,
+                " "))));
 };
 exports["default"] = ActivityBottomSheet;
 var styles = react_native_1.StyleSheet.create({

@@ -1,4 +1,4 @@
-import { View, Platform } from 'react-native'
+import { View, Platform, Image } from 'react-native'
 import React, { useCallback, useRef, useState } from 'react'
 import MapView from "react-native-map-clustering";
 import { Marker } from 'react-native-maps';
@@ -10,7 +10,6 @@ import { useFocusEffect } from '@react-navigation/native';
 import CustomMarker from './CustomMarker';
 import BottomSheet from "@gorhom/bottom-sheet";
 import DetachedSheet from './DetachedSheet';
-import Feather from 'react-native-vector-icons/Feather';
 import ActivityBottomSheet from './ActivityBottomSheet';
 
 
@@ -30,6 +29,11 @@ const MapComponent = (props: Props) => {
     });
 
     const [loading, setLoading] = useState(true);
+
+    const [title, setTitle] = useState('')
+    const [description, setDescription] = useState('')
+
+    const activitiesStore: Array<any> = useSelector((state: RootState) => state.activities.activities)
 
     const bottomSheetRef = React.useRef<BottomSheet>(null);
     const activityBottomSheet = React.useRef<BottomSheet>(null);
@@ -67,23 +71,41 @@ const MapComponent = (props: Props) => {
                 }
                 {
                     activityLocations.map((activity, index) => (
-                        <Marker coordinate={{ latitude: activity.lat, longitude: activity.lng }} key={index} pinColor="green" 
-                        onPress={() => {
-                            activityBottomSheet.current?.expand()
-                            }}> 
-                            <Feather 
-                                name='twitter' 
-                                size = {20}
-                                style ={{
-                                    backgroundColor: 'pink',
-                                }}
-                                 /> 
+                        <Marker 
+                            coordinate={{ latitude: activity.loc.lat, longitude: activity.loc.lng }} 
+                            key={index} 
+                            pinColor="green" 
+                            onPress={() => {
+                                let store_activity = activitiesStore.find(a => a._id === activity.id);
+                                setTitle(store_activity.title)
+                                setDescription(store_activity.description)
+                                activityBottomSheet.current?.expand()
+                            }}
+                            > 
+                            <Image  style ={{
+                                    width: 23,
+                                    height: 23,
+                                    shadowColor: "#000",
+                                    shadowOffset: {
+                                        width: 0,
+                                        height: 12,
+                                    },
+                                    shadowOpacity: 0.58,
+                                    shadowRadius: 16.00,
+                                    
+                                    
+                                    
+                            }} source={require('../assets/star.png')} />
                         </Marker>
                     ))
                 }
             </MapView>
             <DetachedSheet bottomSheetRef={bottomSheetRef} />
-            <ActivityBottomSheet bottomSheetRef={activityBottomSheet} />
+            <ActivityBottomSheet 
+                title = {title}
+                description = {description}
+                bottomSheetRef={activityBottomSheet} 
+                />
 
         </View>
     )

@@ -5,6 +5,7 @@ import Handle from './BottomSheetHandle';
 import { Button } from 'react-native';
 import AntDesign from 'react-native-vector-icons/AntDesign'
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
+import CustomFooter from './CustomFooter';
 
 
 
@@ -30,6 +31,7 @@ const ActivityBottomSheet = (props: any) => {
             handleComponent={Handle}
             enablePanDownToClose={true}
             style={styles.sheetContainer}
+            footerComponent={CustomFooter}
         >
             <View style={styles.container}>
                 
@@ -42,7 +44,7 @@ const ActivityBottomSheet = (props: any) => {
                     flexDirection: 'row'
                 }}>
                     <View style = {{borderColor: 'white'}}>
-                <Text style={styles.textstyle}>Yoga </Text>
+                <Text style={styles.textstyle}>{props.title} </Text>
                 </View>
                 <TouchableOpacity  
                     onPress={() => {
@@ -52,7 +54,7 @@ const ActivityBottomSheet = (props: any) => {
                     <MaterialIcons name="close" size={24} color="#909B9B" />
                 </TouchableOpacity>
                 </View>
-                <Text style={styles.desc}>Yoga is an ancient practice that originated in India over 5,000 years ago. The word "yoga" is derived from the Sanskrit word "yuj," which means to yoke or unite. It is a holistic approach to wellness that integrates the mind, body, and spirit. The practice of yoga involves a combination of physical postures, breathing exercises, and meditation techniques. </Text>
+                <Text style={styles.desc}> {props.description} </Text>
             </View>
             
 

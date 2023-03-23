@@ -40,7 +40,7 @@ const Home = (props: Props) => {
                 try {
                     const json = await Geocoder.from(activity.address)
                     var location = json.results[0].geometry.location
-                    return location
+                    return {loc: location, id: activity._id}
                 } catch (error) {
                     console.warn(error)
                     return null
