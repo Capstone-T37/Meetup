@@ -1,4 +1,4 @@
-import { View, Platform, Image } from 'react-native'
+import { View, Platform, Image, StyleSheet } from 'react-native'
 import React, { useCallback, useRef, useState } from 'react'
 import MapView from "react-native-map-clustering";
 import { Marker } from 'react-native-maps';
@@ -11,11 +11,18 @@ import CustomMarker from './CustomMarker';
 import BottomSheet from "@gorhom/bottom-sheet";
 import DetachedSheet from './DetachedSheet';
 import ActivityBottomSheet from './ActivityBottomSheet';
-
+import { FAB } from 'react-native-paper';
+import { BottomSheetModal } from '@gorhom/bottom-sheet';
+import CreateActivityModal from './CreateActivityModal';
 
 type Props = {}
 const MapComponent = (props: Props) => {
 
+    const bottomSheetModalRef = useRef<BottomSheetModal>(null);
+    // callbacks
+    const handlePresentModalPress = useCallback(() => {
+        bottomSheetModalRef.current?.present();
+    }, []);
     const locations = useSelector((state: RootState) => state.locations.locations)
     const activityLocations = useSelector((state: RootState) => state.activityLocations.locations)
     const id = useSelector((state: RootState) => state.id.id)
@@ -42,7 +49,7 @@ const MapComponent = (props: Props) => {
         useCallback(() => {
             (async () => Location.getCurrentPositionAsync({}).then((res) => {
                 initialPosition.current = {
-                    latitude: 45.424721, longitude: -75.6972, latitudeDelta: 0.122,
+                    latitude: res.coords.latitude, longitude: res.coords.longitude, latitudeDelta: 0.122,
                     longitudeDelta: 0.121,
                 }
                 setLoading(false);
@@ -71,44 +78,58 @@ const MapComponent = (props: Props) => {
                 }
                 {
                     activityLocations.map((activity, index) => (
-                        <Marker 
-                            coordinate={{ latitude: activity.loc.lat, longitude: activity.loc.lng }} 
-                            key={index} 
-                            pinColor="green" 
+                        <Marker
+                            coordinate={{ latitude: activity.loc.lat, longitude: activity.loc.lng }}
+                            key={index}
+                            pinColor="green"
                             onPress={() => {
                                 let store_activity = activitiesStore.find(a => a._id === activity.id);
                                 setTitle(store_activity.title)
                                 setDescription(store_activity.description)
                                 activityBottomSheet.current?.expand()
                             }}
-                            > 
-                            <Image  style ={{
-                                    width: 23,
-                                    height: 23,
-                                    shadowColor: "#000",
-                                    shadowOffset: {
-                                        width: 0,
-                                        height: 12,
-                                    },
-                                    shadowOpacity: 0.58,
-                                    shadowRadius: 16.00,
-                                    
-                                    
-                                    
+                        >
+                            <Image style={{
+                                width: 23,
+                                height: 23,
+                                shadowColor: "#000",
+                                shadowOffset: {
+                                    width: 0,
+                                    height: 12,
+                                },
+                                shadowOpacity: 0.58,
+                                shadowRadius: 16.00,
+
+
+
                             }} source={require('../assets/star.png')} />
                         </Marker>
                     ))
                 }
             </MapView>
             <DetachedSheet bottomSheetRef={bottomSheetRef} />
-            <ActivityBottomSheet 
-                title = {title}
-                description = {description}
-                bottomSheetRef={activityBottomSheet} 
-                />
-
+            <ActivityBottomSheet
+                title={title}
+                description={description}
+                bottomSheetRef={activityBottomSheet}
+            />
+            <FAB
+                icon="plus"
+                color='white'
+                style={styles.fab}
+                onPress={() => handlePresentModalPress()}
+            />
+            <CreateActivityModal bottomSheetModalRef={ bottomSheetModalRef} />
         </View>
     )
 }
-
+const styles = StyleSheet.create({
+    fab: {
+        position: 'absolute',
+        margin: 16,
+        right: 0,
+        bottom: 0,
+        backgroundColor: 'black',
+    },
+})
 export default MapComponent

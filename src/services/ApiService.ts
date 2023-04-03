@@ -1,7 +1,6 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import axios, { AxiosResponse } from 'axios';
 import React, { ReactElement } from 'react';
-import Popup from '../components/Popup';
 
 
 export const postRequest = async (url: string, data: any): Promise<AxiosResponse<any, any>> => {
