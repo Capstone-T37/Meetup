@@ -100,9 +100,10 @@ const CreateActivityModal = (props: Props) => {
                 backgroundStyle={{ backgroundColor: 'rgb(39, 38, 39)' }}
             >
                 <View style={styles.contentContainer}>
+                    <Text style={styles.textstyle}> Activity </Text>
                     <CInput
                         control={control}
-                        style={{ marginBottom: 30 }}
+                        style={{ marginBottom: 20 }}
                         placeholder="Please enter a title..."
                         label="title"
                         name="title"
@@ -111,7 +112,7 @@ const CreateActivityModal = (props: Props) => {
                     />
                     <CInput
                         control={control}
-                        style={{ marginBottom: 30 }}
+                        style={{ marginBottom: 20 }}
                         placeholder="Please enter an address..."
                         label="address"
                         name="address"
@@ -121,7 +122,7 @@ const CreateActivityModal = (props: Props) => {
                     />
                     <CInput
                         control={control}
-                        style={{ marginBottom: 30 }}
+                        style={{ marginBottom: 20 }}
                         placeholder="Please enter a description..."
                         label="description"
                         name="description"
@@ -131,7 +132,7 @@ const CreateActivityModal = (props: Props) => {
                     />
                     <CInput
                         control={control}
-                        style={{ marginBottom: 30 }}
+                        style={{ marginBottom: 20 }}
                         placeholder="Please enter number of participants..."
                         label="size"
                         name="size"
@@ -162,7 +163,7 @@ const CreateActivityModal = (props: Props) => {
                             props.bottomSheetModalRef.current?.close()
                             control._reset()
                             })}>
-                            <Text style={styles.buttonText} >Submit</Text>
+                            <Text style={styles.buttonText} >Add</Text>
                         </Button>
                     </View>
                 </View>
@@ -179,15 +180,17 @@ const styles = StyleSheet.create({
         padding: 24,
         justifyContent: 'center',
         backgroundColor: 'grey',
+        
     },
     contentContainer: {
         height: "100%",
         width: '100%',
+        padding: 20,
     },
     buttonContainer: {
         height: '40%',
         width: '100%',
-        justifyContent: 'center',
+       marginTop: '15%'
     },
     buttonText: {
         fontSize: 20,
@@ -195,5 +198,18 @@ const styles = StyleSheet.create({
     },
     button: {
         backgroundColor: 'black',
+        borderRadius: 10
+    },textstyle: {
+        
+        
+        color: 'white',
+        fontSize: 45,
+        fontWeight: 'bold',
+        marginRight: 'auto',
+        marginLeft: 'auto',
+        marginBottom: '7%'
+        
+      
+        
     }
 });
