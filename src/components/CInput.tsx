@@ -4,49 +4,50 @@ import { Text, TextInput } from 'react-native-paper';
 import { Controller } from "react-hook-form";
 
 export interface Props {
-    control: any; 
+    control: any;
     name: any;
-    label?: any; 
-    placeholder: any; 
+    label?: any;
+    placeholder: any;
     secureTextEntry: any;
-    rules: any;
-    style: any;
+    rules?: any;
+    style?: any;
+    keyboardType?: any;
 
 }
 
-const CInput: React.FC<Props> = ({control, name, label, style, rules = {}, placeholder, secureTextEntry}) => {
-   
+const CInput: React.FC<Props> = ({ control, name, label, style, rules = {}, placeholder, secureTextEntry,keyboardType }) => {
+
     return (
         <View>
             <Controller
-                control = {control}
-                name = {name}
-                rules = {rules}
-                render = {({field: {value, onBlur, onChange}, fieldState: {error}}) => {
+                control={control}
+                name={name}
+                rules={rules}
+                render={({ field: { value, onBlur, onChange }, fieldState: { error } }) => {
                     return <View style={style}>
-                                <TextInput 
-                                    label={label}
+                        <TextInput
+                            label={label}
 
-                                    style = {{marginBottom: 5, backgroundColor: 'none'}}
+                            style={{ marginBottom: 5, backgroundColor: 'none' }}
 
 
-                                    textColor= 'white'
-
-                                    onBlur = {onBlur}
-                                    onChangeText= {onChange}
-                                    underlineColor='white'
-                                    autoCorrect = {false}
-                                    placeholder={placeholder}
-                                    secureTextEntry = {secureTextEntry}
-                                    value={value}
-                                />
-                                {error && (<Text style= {{color: 'red'}}>{error.message || 'error'}</Text>) }
-                            </View>
+                            textColor='white'
+                            keyboardType={keyboardType}
+                            onBlur={onBlur}
+                            onChangeText={onChange}
+                            underlineColor='white'
+                            autoCorrect={false}
+                            placeholder={placeholder}
+                            secureTextEntry={secureTextEntry}
+                            value={value}
+                        />
+                        {error && (<Text style={{ color: 'red' }}>{error.message || 'error'}</Text>)}
+                    </View>
                 }}
             />
         </View>
-        
-        
+
+
     );
 }
 
