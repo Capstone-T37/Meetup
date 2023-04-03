@@ -4,11 +4,16 @@ import { SafeAreaView } from 'react-native-safe-area-context'
 import { useForm } from "react-hook-form";
 import CInput from '../components/CInput';
 import AntDesign from 'react-native-vector-icons/AntDesign';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../redux/store';
+import { routes } from '../routes/routes';
+import { getRequest } from '../services/ApiService';
+import { setActivities } from '../redux/slices/activitySlice';
+import { setActivityLocations } from '../redux/slices/activityLocationSlice';
+import Geocoder from 'react-native-geocoding';
 
 type Props = {}
-
+Geocoder.init("AIzaSyDYC0H9ezO956jUEz7tu6XhEpTOwknL0iA");
 
 
 const SearchScreen = (props: Props) => {
@@ -17,10 +22,12 @@ const SearchScreen = (props: Props) => {
             search: '',
         }
     });
+    const dispatch = useDispatch()
 
     const activitiesStore: Array<any> = useSelector((state: RootState) => state.activities.activities)
 
-    const [activities, setActivities] = useState(new Array())
+    const [activities, setActivitiess] = useState(new Array())
+    const [isRefreshing, setRefreshing] = useState(false)
 
     interface Event {
         title: string;
@@ -34,7 +41,7 @@ const SearchScreen = (props: Props) => {
     }
 
     useEffect( () => {
-        setActivities(activitiesStore)
+        setActivitiess(activitiesStore)
         }
     )
 
@@ -69,6 +76,29 @@ const SearchScreen = (props: Props) => {
             </TouchableOpacity>
         );
     };
+
+    const LoadActivityCredentials = async () => {
+        setRefreshing(true)
+        let domain = routes.activityHost + routes.activityEndPoint
+        getRequest(domain).then(async resp => {
+        const activities = resp?.data;
+        dispatch(setActivities(activities))
+        Promise.all(activities.map(async (activity: any) => {
+            try {
+                const json = await Geocoder.from(activity.address)
+                var location = json.results[0].geometry.location
+                setRefreshing(false)
+                return {loc: location, id: activity._id}
+            } catch (error) {
+                console.warn(error)
+                return null
+            }
+          })).then((locations) => {
+            const filteredLocations = locations.filter(location => location !== null);
+            dispatch(setActivityLocations(filteredLocations));
+          });
+    })
+}
     return (
         <View style={{ backgroundColor: 'grey' }}>
             <SafeAreaView style={styles.container}>
@@ -83,6 +113,8 @@ const SearchScreen = (props: Props) => {
                 </View>
                 <View>
                     <FlatList
+                        onRefresh={LoadActivityCredentials}
+                        refreshing={isRefreshing}
                         data={activities}
                         renderItem={renderItem}
                         style={styles.list}
