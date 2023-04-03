@@ -10,11 +10,16 @@ import { useForm } from "react-hook-form";
 import CInput from '../components/CInput';
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import { routes } from '../routes/routes';
-import { postRequest } from '../services/ApiService';
-
+import { getRequest, postRequest } from '../services/ApiService';
+import SocketService from '../services/SocketService';
+import { useDispatch } from 'react-redux';
+import { setActivities } from '../redux/slices/activitySlice';
+import { setActivityLocations } from '../redux/slices/activityLocationSlice';
+import Geocoder from 'react-native-geocoding';
 type Props = {
     bottomSheetModalRef: React.RefObject<BottomSheetModal>
 }
+Geocoder.init("AIzaSyDYC0H9ezO956jUEz7tu6XhEpTOwknL0iA");
 type Activity = {
     title: string,
     address: string,
@@ -24,7 +29,7 @@ type Activity = {
 }
 
 const CreateActivityModal = (props: Props) => {
-
+    const dispatch = useDispatch()
     const [date, setDate] = React.useState(new Date())
     const [open, setOpen] = React.useState(false)
     // variables
@@ -60,9 +65,30 @@ const CreateActivityModal = (props: Props) => {
             participants:[],
             size:newActivity.size,
             description:newActivity.description
+        }).then(()=>{
+            LoadActivityCredentials()
         })
     }
-
+    const LoadActivityCredentials = async () => {
+        let domain = routes.activityHost + routes.activityEndPoint
+        getRequest(domain).then(async resp => {
+        const activities = resp?.data;
+        dispatch(setActivities(activities))
+        Promise.all(activities.map(async (activity: any) => {
+            try {
+                const json = await Geocoder.from(activity.address)
+                var location = json.results[0].geometry.location
+                return {loc: location, id: activity._id}
+            } catch (error) {
+                console.warn(error)
+                return null
+            }
+          })).then((locations) => {
+            const filteredLocations = locations.filter(location => location !== null);
+            dispatch(setActivityLocations(filteredLocations));
+          });
+    })
+}
     // renders
     return (
         <BottomSheetModalProvider>
@@ -134,6 +160,7 @@ const CreateActivityModal = (props: Props) => {
                         <Button style={styles.button} onPress={handleSubmit((data)=>{
                             submitActivity({...data,date:date})
                             props.bottomSheetModalRef.current?.close()
+                            control._reset()
                             })}>
                             <Text style={styles.buttonText} >Submit</Text>
                         </Button>
