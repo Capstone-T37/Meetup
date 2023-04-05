@@ -11,6 +11,7 @@ import { getRequest } from '../services/ApiService';
 import { setActivities } from '../redux/slices/activitySlice';
 import { setActivityLocations } from '../redux/slices/activityLocationSlice';
 import Geocoder from 'react-native-geocoding';
+import { TextInput } from 'react-native-paper';
 
 type Props = {}
 Geocoder.init("AIzaSyDYC0H9ezO956jUEz7tu6XhEpTOwknL0iA");
@@ -26,7 +27,7 @@ const SearchScreen = (props: Props) => {
 
     const activitiesStore: Array<any> = useSelector((state: RootState) => state.activities.activities)
 
-    const [activities, setActivitiess] = useState(new Array())
+    const [activities, setActivitiess] = useState(activitiesStore)
     const [isRefreshing, setRefreshing] = useState(false)
 
     interface Event {
@@ -39,11 +40,6 @@ const SearchScreen = (props: Props) => {
         participants: string[];
         created_by: string;
     }
-
-    useEffect( () => {
-        setActivitiess(activitiesStore)
-        }
-    )
 
     const renderItem = ({ item }: { item: Event }) => {
         return (
@@ -77,6 +73,14 @@ const SearchScreen = (props: Props) => {
         );
     };
 
+    const applySearchFilter = (filter: string) => {   
+        if (filter.replace(/\s/g, "") === "") { 
+            setActivitiess(activitiesStore) 
+            return ;
+        }
+        setActivitiess(activitiesStore.filter(activity => activity.title.toLowerCase().includes(filter.toLowerCase())));
+    }
+
     const LoadActivityCredentials = async () => {
         setRefreshing(true)
         let domain = routes.activityHost + routes.activityEndPoint
@@ -103,13 +107,14 @@ const SearchScreen = (props: Props) => {
         <View style={{ backgroundColor: 'grey' }}>
             <SafeAreaView style={styles.container}>
                 <View style={styles.input}>
-                    <CInput
-                        control={control}
-                        style={{ marginBottom: 30 }}
-                        placeholder="Search events"
-                        rules={() => { }}
-                        name="search"
-                        secureTextEntry={false} />
+                <TextInput
+                    style={{ marginBottom: 20, backgroundColor: 'none'}}
+                    underlineColor='white'
+                    textColor='white'
+                    autoCorrect={false}
+                    placeholder={'search events'}
+                    onChangeText={(filter) => applySearchFilter(filter)}
+                />
                 </View>
                 <View>
                     <FlatList
